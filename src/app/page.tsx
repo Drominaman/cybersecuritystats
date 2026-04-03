@@ -65,7 +65,7 @@ export default async function HomePage() {
               href="/threats/ransomware"
               className="bg-[var(--accent)] text-[var(--accent-fg)] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
             >
-              Browse by Threat
+              Browse by Topic
             </Link>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default async function HomePage() {
         <div className="py-16 border-t-2 border-[var(--border)]">
           <div className="flex items-center gap-4 mb-8">
             <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
-              Trending Threats
+              Browse by Topic
             </h2>
             <div className="flex-1 border-t-2 border-[var(--border)]" />
             <Link

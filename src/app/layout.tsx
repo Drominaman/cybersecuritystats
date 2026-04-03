@@ -34,8 +34,7 @@ export const metadata: Metadata = {
     canonical: './',
   },
   verification: {
-    // Add your Google Search Console verification code here:
-    // google: 'your-verification-code',
+    google: 'o9sh4HR89YcYawwoKVcQdGaLtKVTtO7hIXRU9N9NmsE',
   },
 }
 
@@ -51,7 +50,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
