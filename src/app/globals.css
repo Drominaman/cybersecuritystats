@@ -35,6 +35,11 @@ body {
 html {
   overflow-y: scroll;
   scrollbar-gutter: stable;
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
 }
 
 ::selection {
