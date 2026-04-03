@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getAllPublishers } from '@/lib/queries'
+import { getAllPublishers } from '@/lib/static-data'
 import { slugify, formatNumber } from '@/lib/utils'
 
 export const revalidate = 86400

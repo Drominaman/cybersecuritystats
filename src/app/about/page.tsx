@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getTotalStatCount, getUniqueReportCount, getAllPublishers } from '@/lib/queries'
+import { getTotalStatCount, getUniqueReportCount, getAllPublishers } from '@/lib/static-data'
 
 export const metadata: Metadata = {
   title: 'About',

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getStatsForIndustry } from '@/lib/queries'
+import { getStatsForIndustry } from '@/lib/static-data'
 import { getEnabledClusters } from '@/data/clusters'
 import { slugify, formatNumber } from '@/lib/utils'
 import { THREAT_NORMALIZE } from '@/data/tag-normalize'

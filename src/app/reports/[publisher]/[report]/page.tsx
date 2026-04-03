@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getStatsForPublisher, getAllPublishers } from '@/lib/queries'
+import { getStatsForPublisher, getAllPublishers } from '@/lib/static-data'
 import { slugify, formatDate } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
 

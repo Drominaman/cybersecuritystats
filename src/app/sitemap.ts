@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getEnabledClusters } from '@/data/clusters'
-import { getAllPublishers } from '@/lib/queries'
+import { getAllPublishers } from '@/lib/static-data'
 import { slugify } from '@/lib/utils'
 
 const BASE = 'https://cybersecuritystats.com'

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getStatsForIndustryAndThreat } from '@/lib/queries'
+import { getStatsForIndustryAndThreat } from '@/lib/static-data'
 import { getClusterByIndustry, getEnabledClusters } from '@/data/clusters'
 import { slugify } from '@/lib/utils'
 import StatCard from '@/components/StatCard'

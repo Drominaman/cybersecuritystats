@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { getEnabledClusters } from '@/data/clusters'
-import { getTotalStatCount, getUniqueReportCount, getAllPublishers } from '@/lib/queries'
+import { getTotalStatCount, getUniqueReportCount, getAllPublishers } from '@/lib/static-data'
 import { slugify } from '@/lib/utils'
 import { JsonLd, websiteSchema, datasetSchema } from '@/components/JsonLd'
 
