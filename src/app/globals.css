@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffdf5;
+  --foreground: #0a0a0a;
+  --muted: #555555;
+  --border: #0a0a0a;
+  --border-light: #d4d4d4;
+  --accent: #ff3d00;
+  --accent-bg: #ff3d00;
+  --accent-fg: #ffffff;
+  --surface: #f0ede4;
+  --highlight: #c8ff00;
 }
 
 @theme inline {
@@ -12,15 +20,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Brutalist: no radius, no shadows, thick borders */
+* {
+  border-radius: 0;
+}
+
+::selection {
+  background: var(--highlight);
+  color: var(--foreground);
 }

@@ -1,65 +1,75 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { getEnabledClusters } from '@/data/clusters'
+import { getTotalStatCount } from '@/lib/queries'
+import { slugify } from '@/lib/utils'
 
-export default function Home() {
+export const revalidate = 3600
+
+export default async function HomePage() {
+  const clusters = getEnabledClusters()
+  const totalStats = await getTotalStatCount()
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="max-w-6xl mx-auto px-4 py-16">
+      {/* Hero */}
+      <div className="mb-20">
+        <h1 className="text-6xl font-black tracking-tighter leading-none mb-6">
+          Cybersecurity<br />
+          <span className="text-[var(--accent)]">Statistics</span>
+        </h1>
+        <p className="text-lg text-[var(--muted)] max-w-xl">
+          <span className="font-mono text-2xl font-black text-[var(--foreground)]">
+            {totalStats.toLocaleString()}
+          </span>{' '}
+          data points from 700+ reports. Organized by industry and threat type.
+        </p>
+      </div>
+
+      {/* Matrix Grid */}
+      <div className="mb-20">
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+            Industry &times; Threat Matrix
+          </h2>
+          <div className="flex-1 border-t-2 border-[var(--border)]" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="space-y-4">
+          {clusters.map((cluster) => (
+            <div
+              key={cluster.id}
+              className="border-2 border-[var(--border)] p-5 hover:bg-[var(--surface)] transition-colors"
+            >
+              <Link
+                href={`/industry/${cluster.id}`}
+                className="text-lg font-black uppercase tracking-tight hover:text-[var(--accent)]"
+              >
+                {cluster.label}
+              </Link>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {cluster.threats.map((threat) => (
+                  <Link
+                    key={threat}
+                    href={`/industry/${cluster.id}/${slugify(threat)}`}
+                    className="inline-block border-2 border-[var(--border)] px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-wider hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:border-[var(--accent)] transition-colors"
+                  >
+                    {threat}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
+      </div>
+
+      {/* About */}
+      <div className="border-t-2 border-[var(--border)] pt-8">
+        <p className="text-sm text-[var(--muted)] max-w-xl">
+          We aggregate cybersecurity statistics from published industry reports
+          and organize them by sector and attack type. Every stat links to its
+          original source.
+        </p>
+      </div>
     </div>
-  );
+  )
 }
