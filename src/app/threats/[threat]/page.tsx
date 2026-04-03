@@ -97,23 +97,16 @@ export default async function ThreatPage({ params }: Props) {
               </div>
               <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
                 {topIndustries.map(([industry, count]) => {
-                  const cluster = clusters.find(
-                    (c) => c.industry === industry && c.threats.some((t) => slugify(t) === threat)
-                  )
+                  const cluster = clusters.find((c) => c.industry === industry)
                   return (
-                    <div key={industry} className="flex items-center justify-between p-3">
-                      {cluster ? (
-                        <Link
-                          href={`/industry/${cluster.id}/${threat}`}
-                          className="text-sm font-bold hover:text-[var(--accent)]"
-                        >
-                          {industry}
-                        </Link>
-                      ) : (
-                        <span className="text-sm">{industry}</span>
-                      )}
+                    <Link
+                      key={industry}
+                      href={cluster ? `/industry/${cluster.id}/${threat}` : `/threats/${threat}`}
+                      className="flex items-center justify-between p-3 hover:bg-[var(--surface)] transition-colors"
+                    >
+                      <span className="text-sm font-bold hover:text-[var(--accent)]">{industry}</span>
                       <span className="font-mono text-xs text-[var(--muted)]">{count}</span>
-                    </div>
+                    </Link>
                   )
                 })}
               </div>
