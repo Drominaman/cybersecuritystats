@@ -11,6 +11,9 @@ export default function Footer() {
           <Link href="/about" className="hover:text-[var(--highlight)]">
             About
           </Link>
+          <Link href="/author" className="hover:text-[var(--highlight)]">
+            Author
+          </Link>
           <Link href="/newsletter" className="hover:text-[var(--highlight)]">
             Newsletter
           </Link>
