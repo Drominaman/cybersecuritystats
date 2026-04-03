@@ -65,7 +65,7 @@ export default async function HomePage() {
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-4">
                 Updated April 2026
               </p>
-              <h1 className="text-5xl font-black tracking-tighter leading-[0.95] mb-6">
+              <h1 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.95] mb-6">
                 Cybersecurity Statistics,<br />
                 Indexed &amp; Organized
               </h1>
@@ -73,7 +73,7 @@ export default async function HomePage() {
                 {totalStats.toLocaleString()} data points from {reportCount.toLocaleString()} industry reports.
                 Browse by sector, threat type, or publisher.
               </p>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/industry/healthcare"
                   className="border-2 border-[var(--border)] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
@@ -104,7 +104,7 @@ export default async function HomePage() {
           </div>
 
           {/* Quick stats bar */}
-          <div className="mt-12 pt-6 border-t-2 border-[var(--border)] flex gap-8">
+          <div className="mt-12 pt-6 border-t-2 border-[var(--border)] flex flex-wrap gap-6 md:gap-8">
             <div>
               <span className="text-2xl font-black">{totalStats.toLocaleString()}</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] ml-2">statistics</span>
