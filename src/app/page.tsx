@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getEnabledClusters } from '@/data/clusters'
 import { getTotalStatCount, getUniqueReportCount } from '@/lib/queries'
 import { slugify } from '@/lib/utils'
+import { JsonLd, websiteSchema, datasetSchema } from '@/components/JsonLd'
 
 export const revalidate = 3600
 
@@ -14,6 +15,14 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
+      <JsonLd data={websiteSchema()} />
+      <JsonLd data={datasetSchema({
+        name: 'Cybersecurity Statistics Database',
+        description: `${totalStats.toLocaleString()} cybersecurity statistics from ${reportCount} published industry reports, organized by industry and threat type.`,
+        url: 'https://cybersecuritystats.com',
+        keywords: ['cybersecurity statistics', 'ransomware statistics', 'data breach statistics', 'phishing statistics', 'cybersecurity data'],
+        statCount: totalStats,
+      })} />
       {/* Hero */}
       <div className="mb-20">
         <h1 className="text-6xl font-black tracking-tighter leading-none mb-6">

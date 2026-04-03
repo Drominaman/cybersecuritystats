@@ -5,6 +5,7 @@ import { getStatsForIndustryAndThreat } from '@/lib/queries'
 import { getClusterByIndustry, getEnabledClusters } from '@/data/clusters'
 import { slugify } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
+import { JsonLd, datasetSchema, breadcrumbSchema } from '@/components/JsonLd'
 
 export const revalidate = 86400 // 24 hours
 
@@ -68,6 +69,18 @@ export default async function MatrixPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
+      <JsonLd data={datasetSchema({
+        name: `${match.cluster.label} ${match.threat} Statistics`,
+        description: `${stats.length} ${match.cluster.label.toLowerCase()} ${match.threat.toLowerCase()} cybersecurity statistics from ${publishers.length} sources.`,
+        url: `https://cybersecuritystats.com/industry/${industry}/${slugify(match.threat)}`,
+        keywords: [match.cluster.label, match.threat, 'cybersecurity statistics', `${match.cluster.label} ${match.threat}`],
+        statCount: stats.length,
+      })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: 'Home', url: 'https://cybersecuritystats.com' },
+        { name: match.cluster.label, url: `https://cybersecuritystats.com/industry/${industry}` },
+        { name: match.threat, url: `https://cybersecuritystats.com/industry/${industry}/${slugify(match.threat)}` },
+      ])} />
       {/* Breadcrumb */}
       <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
         <Link href="/" className="hover:text-[var(--accent)]">Home</Link>

@@ -8,6 +8,9 @@ export default function Footer() {
           CyberSecurityStats
         </p>
         <div className="flex gap-4 font-mono text-xs uppercase tracking-wider">
+          <Link href="/about" className="hover:text-[var(--highlight)]">
+            About
+          </Link>
           <Link href="/newsletter" className="hover:text-[var(--highlight)]">
             Newsletter
           </Link>

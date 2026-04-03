@@ -15,12 +15,28 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://cybersecuritystats.com'),
   title: {
     default: 'Cybersecurity Statistics — Data by Industry and Threat',
     template: '%s | CyberSecurityStats.com',
   },
   description:
     'Cybersecurity statistics organized by industry and threat type. Healthcare ransomware, financial services fraud, and more — data from 700+ reports.',
+  openGraph: {
+    type: 'website',
+    siteName: 'CyberSecurityStats',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  alternates: {
+    canonical: './',
+  },
+  verification: {
+    // Add your Google Search Console verification code here:
+    // google: 'your-verification-code',
+  },
 }
 
 export default function RootLayout({
