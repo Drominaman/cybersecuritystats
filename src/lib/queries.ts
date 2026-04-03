@@ -131,3 +131,17 @@ export async function getTotalStatCount(): Promise<number> {
 
   return count ?? 0
 }
+
+export async function getUniqueReportCount(): Promise<number> {
+  const { data } = await supabase
+    .from('cyberstats_rss')
+    .select('source_name')
+
+  if (!data) return 0
+
+  const unique = new Set<string>()
+  for (const row of data) {
+    if (row.source_name) unique.add(row.source_name.trim())
+  }
+  return unique.size
+}

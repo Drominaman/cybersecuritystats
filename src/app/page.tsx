@@ -1,13 +1,16 @@
 import Link from 'next/link'
 import { getEnabledClusters } from '@/data/clusters'
-import { getTotalStatCount } from '@/lib/queries'
+import { getTotalStatCount, getUniqueReportCount } from '@/lib/queries'
 import { slugify } from '@/lib/utils'
 
 export const revalidate = 3600
 
 export default async function HomePage() {
   const clusters = getEnabledClusters()
-  const totalStats = await getTotalStatCount()
+  const [totalStats, reportCount] = await Promise.all([
+    getTotalStatCount(),
+    getUniqueReportCount(),
+  ])
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
@@ -21,7 +24,7 @@ export default async function HomePage() {
           <span className="font-mono text-2xl font-black text-[var(--foreground)]">
             {totalStats.toLocaleString()}
           </span>{' '}
-          data points from 700+ reports. Organized by industry and threat type.
+          data points from {reportCount.toLocaleString()} reports. Organized by industry and threat type.
         </p>
       </div>
 
