@@ -6,6 +6,7 @@ import { getClusterByIndustry, getEnabledClusters } from '@/data/clusters'
 import { slugify } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
 import { JsonLd, datasetSchema, breadcrumbSchema } from '@/components/JsonLd'
+import { THREAT_LABELS } from '@/data/threats'
 
 export const revalidate = 86400 // 24 hours
 
@@ -18,7 +19,12 @@ function findClusterAndThreat(industrySlug: string, threatSlug: string) {
   const cluster = clusters.find((c) => c.id === industrySlug)
   if (!cluster) return null
 
-  const threat = cluster.threats.find((t) => slugify(t) === threatSlug)
+  // First try the cluster's own threat list
+  let threat = cluster.threats.find((t) => slugify(t) === threatSlug)
+  // Fall back to any known threat
+  if (!threat) {
+    threat = THREAT_LABELS[threatSlug]
+  }
   if (!threat) return null
 
   return { cluster, threat }

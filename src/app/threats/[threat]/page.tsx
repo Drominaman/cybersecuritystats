@@ -7,26 +7,9 @@ import { INDUSTRY_NORMALIZE } from '@/data/tag-normalize'
 import { slugify, formatNumber } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
 
-export const revalidate = 86400
+import { THREAT_LABELS } from '@/data/threats'
 
-const THREAT_LABELS: Record<string, string> = {
-  ransomware: 'Ransomware',
-  fraud: 'Fraud',
-  phishing: 'Phishing',
-  'data-breach': 'Data Breach',
-  ddos: 'DDoS',
-  'cyber-attack': 'Cyber Attack',
-  'insider-threat': 'Insider Threat',
-  'cloud-threats': 'Cloud Threats',
-  'account-compromise': 'Account Compromise',
-  'ai-threats': 'AI Threats',
-  deepfakes: 'Deepfakes',
-  malware: 'Malware',
-  'supply-chain': 'Supply Chain',
-  'social-engineering': 'Social Engineering',
-  'business-email-compromise': 'Business Email Compromise',
-  'identity-theft': 'Identity Theft',
-}
+export const revalidate = 86400
 
 interface Props {
   params: Promise<{ threat: string }>
