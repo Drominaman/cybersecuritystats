@@ -48,8 +48,8 @@ export const CLUSTERS: ClusterConfig[] = [
     id: 'government',
     label: 'Government',
     industry: 'Government',
-    threats: ['Fraud', 'Ransomware'],
-    enabled: false,
+    threats: ['Fraud', 'Ransomware', 'AI Threats'],
+    enabled: true,
   },
   {
     id: 'transportation',
