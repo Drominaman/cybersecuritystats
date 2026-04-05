@@ -1,5 +1,5 @@
 import type { Stat } from '@/types'
-import { formatDate, titleCase } from '@/lib/utils'
+import { formatDate, titleCase, slugify } from '@/lib/utils'
 import CopyStatButton from './CopyStatButton'
 
 function timeAgo(dateStr: string): string {
@@ -30,18 +30,12 @@ export default function StatCard({ stat }: { stat: Stat }) {
         <span className="bg-[var(--foreground)] text-[var(--background)] px-2 py-0.5 text-[10px] font-bold">
           {titleCase(stat.publisher)}
         </span>
-        {stat.link ? (
-          <a
-            href={stat.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[var(--accent)] underline decoration-[var(--border-light)]"
-          >
-            {stat.source_name}
-          </a>
-        ) : (
-          <span>{stat.source_name}</span>
-        )}
+        <a
+          href={`/reports/${slugify(stat.publisher)}/${slugify(stat.source_name)}`}
+          className="hover:text-[var(--accent)] underline decoration-[var(--border-light)]"
+        >
+          {stat.source_name}
+        </a>
         {stat.published_on && (
           <>
             <span>&middot;</span>
