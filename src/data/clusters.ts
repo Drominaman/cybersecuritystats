@@ -25,8 +25,8 @@ export const CLUSTERS: ClusterConfig[] = [
     id: 'education',
     label: 'Education',
     industry: 'Education',
-    threats: ['AI Threats', 'Phishing', 'Ransomware'],
-    enabled: false,
+    threats: ['AI Threats', 'Phishing', 'Ransomware', 'Data Breach'],
+    enabled: true,
   },
   {
     id: 'manufacturing',
