@@ -27,15 +27,21 @@ export default function StatCard({ stat }: { stat: Stat }) {
         <CopyStatButton text={copyText} />
       </div>
       <div className="mt-3 flex items-center flex-wrap gap-x-2 gap-y-1 text-xs font-mono uppercase tracking-wider text-[var(--muted)]">
-        <span className="bg-[var(--foreground)] text-[var(--background)] px-2 py-0.5 text-[10px] font-bold">
-          {titleCase(stat.publisher)}
-        </span>
-        <a
-          href={`/reports/${slugify(stat.publisher)}/${slugify(stat.source_name)}`}
-          className="hover:text-[var(--accent)] underline decoration-[var(--border-light)]"
-        >
-          {stat.source_name}
-        </a>
+        {stat.publisher && (
+          <span className="bg-[var(--foreground)] text-[var(--background)] px-2 py-0.5 text-[10px] font-bold">
+            {titleCase(stat.publisher)}
+          </span>
+        )}
+        {stat.publisher && stat.source_name ? (
+          <a
+            href={`/reports/${slugify(stat.publisher)}/${slugify(stat.source_name)}`}
+            className="hover:text-[var(--accent)] underline decoration-[var(--border-light)]"
+          >
+            {stat.source_name}
+          </a>
+        ) : stat.source_name ? (
+          <span>{stat.source_name}</span>
+        ) : null}
         {stat.published_on && (
           <>
             <span>&middot;</span>
