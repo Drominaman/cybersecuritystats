@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getStatsForThreat } from '@/lib/static-data'
 import { slugify, formatNumber } from '@/lib/utils'
+import { JsonLd, breadcrumbSchema } from '@/components/JsonLd'
 import StatCard from '@/components/StatCard'
 
 export const revalidate = 86400
@@ -61,6 +62,10 @@ export default async function ComparePage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
+      <JsonLd data={breadcrumbSchema([
+        { name: 'Home', url: 'https://cybersecuritystats.com' },
+        { name: `${comp.a} vs ${comp.b}`, url: `https://cybersecuritystats.com/compare/${slug}` },
+      ])} />
       <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
         <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
         <span className="mx-2">/</span>

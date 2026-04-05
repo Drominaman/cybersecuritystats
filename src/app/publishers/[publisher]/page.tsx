@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getStatsForPublisher, getAllPublishers } from '@/lib/static-data'
-import { slugify, formatNumber } from '@/lib/utils'
+import { slugify, formatNumber, titleCase } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
 
 export const revalidate = 86400
@@ -21,8 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pub = await findPublisher(slug)
   if (!pub) return {}
 
-  const title = `${pub.publisher} Cybersecurity Statistics`
-  const description = `${pub.count} cybersecurity statistics from ${pub.publisher}. Browse all reports and data.`
+  const name = titleCase(pub.publisher)
+  const title = `${name} Cybersecurity Statistics`
+  const description = `${pub.count} cybersecurity statistics from ${name}. Browse all reports and data.`
   return { title, description, openGraph: { title, description } }
 }
 
@@ -67,12 +68,12 @@ export default async function PublisherPage({ params }: Props) {
         <span className="mx-2">/</span>
         <Link href="/publishers" className="hover:text-[var(--accent)]">Publishers</Link>
         <span className="mx-2">/</span>
-        <span className="text-[var(--foreground)]">{pub.publisher}</span>
+        <span className="text-[var(--foreground)]">{titleCase(pub.publisher)}</span>
       </nav>
 
       <div className="mb-10">
         <h1 className="text-4xl font-black tracking-tighter leading-none mb-3">
-          {pub.publisher}
+          {titleCase(pub.publisher)}
         </h1>
         <div className="flex items-center gap-4 mt-4">
           <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 font-mono text-xs font-bold">
@@ -125,9 +126,9 @@ export default async function PublisherPage({ params }: Props) {
         <aside className="text-sm">
           {/* Topics covered */}
           <div className="border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               Topics Covered
-            </h3>
+            </h2>
             <div className="flex flex-wrap gap-1">
               {topTags.map(([tag, count]) => (
                 <span

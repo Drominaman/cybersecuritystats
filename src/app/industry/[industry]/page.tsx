@@ -116,9 +116,9 @@ export default async function IndustryPage({ params }: Props) {
         <aside className="text-sm">
           {/* Matrix links for this industry */}
           <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               Browse by Threat
-            </h3>
+            </h2>
             <div className="flex flex-col gap-0.5">
               {cluster.threats.map((threat) => (
                 <Link
@@ -134,9 +134,9 @@ export default async function IndustryPage({ params }: Props) {
 
           {/* Other industries */}
           <div className="border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               Other Industries
-            </h3>
+            </h2>
             <div className="flex flex-col gap-0.5">
               {clusters
                 .filter((c) => c.id !== industry)

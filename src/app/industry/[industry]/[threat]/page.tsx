@@ -129,9 +129,9 @@ export default async function MatrixPage({ params }: Props) {
         <aside className="text-sm">
           {/* Same industry, other threats */}
           <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               {match.cluster.label} Threats
-            </h3>
+            </h2>
             <div className="flex flex-col gap-0.5">
               {match.cluster.threats.map((t) => (
                 <Link
@@ -151,9 +151,9 @@ export default async function MatrixPage({ params }: Props) {
 
           {/* Same threat, other industries */}
           <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               {match.threat} by Industry
-            </h3>
+            </h2>
             <div className="flex flex-col gap-0.5">
               {clusters
                 .filter((c) => c.threats.some((t) => slugify(t) === slugify(match.threat)))
@@ -176,9 +176,9 @@ export default async function MatrixPage({ params }: Props) {
           {/* Sources */}
           {publishers.length > 0 && (
             <div className="border-2 border-[var(--border)] p-4">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+              <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
                 Sources
-              </h3>
+              </h2>
               <div className="flex flex-col gap-0.5">
                 {publishers.slice(0, 10).map((pub) => (
                   <Link

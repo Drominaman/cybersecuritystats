@@ -6,6 +6,7 @@ import { getEnabledClusters } from '@/data/clusters'
 import { INDUSTRY_NORMALIZE } from '@/data/tag-normalize'
 import { slugify, formatNumber } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
+import { JsonLd, datasetSchema, breadcrumbSchema } from '@/components/JsonLd'
 
 import { THREAT_LABELS } from '@/data/threats'
 
@@ -64,6 +65,17 @@ export default async function ThreatPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
+      <JsonLd data={datasetSchema({
+        name: `${label} Statistics`,
+        description: `${stats.length} ${label.toLowerCase()} cybersecurity statistics from ${publishers.length} sources.`,
+        url: `https://cybersecuritystats.com/threats/${threat}`,
+        keywords: [label, 'cybersecurity statistics', `${label} statistics`],
+        statCount: stats.length,
+      })} />
+      <JsonLd data={breadcrumbSchema([
+        { name: 'Home', url: 'https://cybersecuritystats.com' },
+        { name: label, url: `https://cybersecuritystats.com/threats/${threat}` },
+      ])} />
       <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
         <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
         <span className="mx-2">/</span>
@@ -128,9 +140,9 @@ export default async function ThreatPage({ params }: Props) {
         <aside className="text-sm">
           {/* Other threats */}
           <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               All Threats
-            </h3>
+            </h2>
             <div className="flex flex-col gap-0.5">
               {Object.entries(THREAT_LABELS).map(([slug, name]) => (
                 <Link
@@ -150,9 +162,9 @@ export default async function ThreatPage({ params }: Props) {
 
           {/* Top sources */}
           <div className="border-2 border-[var(--border)] p-4">
-            <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
               Top Sources
-            </h3>
+            </h2>
             <div className="flex flex-col gap-0.5">
               {publishers.slice(0, 12).map((pub) => (
                 <Link
