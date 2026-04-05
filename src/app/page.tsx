@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getEnabledClusters } from '@/data/clusters'
-import { getTotalStatCount, getUniqueReportCount, getAllPublishers, getStatsForIndustry, getStatsForThreat } from '@/lib/static-data'
+import { getTotalStatCount, getUniqueReportCount, getAllPublishers, getStatsForIndustry, getStatsForThreat, getMostRecentDate } from '@/lib/static-data'
+import { formatDate } from '@/lib/utils'
 import { slugify } from '@/lib/utils'
 import { JsonLd, websiteSchema, datasetSchema } from '@/components/JsonLd'
 
@@ -63,7 +64,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 items-start">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-4">
-                Updated April 2026
+                Updated {formatDate(getMostRecentDate())}
               </p>
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.95] mb-6">
                 Cybersecurity Statistics,<br />

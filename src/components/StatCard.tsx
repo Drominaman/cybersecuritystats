@@ -1,6 +1,20 @@
 import type { Stat } from '@/types'
-import { formatDate } from '@/lib/utils'
+import { formatDate, titleCase } from '@/lib/utils'
 import CopyStatButton from './CopyStatButton'
+
+function timeAgo(dateStr: string): string {
+  const now = new Date()
+  const date = new Date(dateStr)
+  const diffMs = now.getTime() - date.getTime()
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+
+  if (days === 0) return 'today'
+  if (days === 1) return 'yesterday'
+  if (days < 7) return `${days}d ago`
+  if (days < 30) return `${Math.floor(days / 7)}w ago`
+  if (days < 365) return `${Math.floor(days / 30)}mo ago`
+  return `${Math.floor(days / 365)}y ago`
+}
 
 export default function StatCard({ stat }: { stat: Stat }) {
   const tags = [stat.tag1, stat.tag2, stat.tag3, stat.tag4, stat.tag5].filter(Boolean)
@@ -12,15 +26,26 @@ export default function StatCard({ stat }: { stat: Stat }) {
         <p className="text-[15px] leading-relaxed font-medium">{stat.title}</p>
         <CopyStatButton text={copyText} />
       </div>
-      <div className="mt-3 flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--muted)]">
+      <div className="mt-3 flex items-center flex-wrap gap-x-2 gap-y-1 text-xs font-mono uppercase tracking-wider text-[var(--muted)]">
         <span className="bg-[var(--foreground)] text-[var(--background)] px-2 py-0.5 text-[10px] font-bold">
-          {stat.publisher}
+          {titleCase(stat.publisher)}
         </span>
-        <span>{stat.source_name}</span>
+        {stat.link ? (
+          <a
+            href={stat.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--accent)] underline decoration-[var(--border-light)]"
+          >
+            {stat.source_name}
+          </a>
+        ) : (
+          <span>{stat.source_name}</span>
+        )}
         {stat.published_on && (
           <>
             <span>&middot;</span>
-            <span>{formatDate(stat.published_on)}</span>
+            <span title={formatDate(stat.published_on)}>{timeAgo(stat.published_on)}</span>
           </>
         )}
       </div>

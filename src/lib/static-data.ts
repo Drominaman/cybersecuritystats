@@ -38,6 +38,13 @@ export function getAllPublishers(): { publisher: string; count: number }[] {
   return publishers
 }
 
+export function getMostRecentDate(): string {
+  for (const stat of stats) {
+    if (stat.published_on) return stat.published_on
+  }
+  return new Date().toISOString().slice(0, 10)
+}
+
 export function getStatsForIndustryAndThreat(industry: string, threat: string): Stat[] {
   const industryTags = getTagsForNormalized(INDUSTRY_NORMALIZE, industry).map(t => t.toLowerCase())
   const threatTags = getTagsForNormalized(THREAT_NORMALIZE, threat).map(t => t.toLowerCase())
