@@ -6,20 +6,40 @@ import { slugify, formatDate } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
 
 export const revalidate = 86400
-export const dynamicParams = true
+export const dynamicParams = false
 
 interface Props {
   params: Promise<{ publisher: string; report: string }>
 }
 
-async function findPublisherAndReport(pubSlug: string, reportSlug: string) {
-  const publishers = await getAllPublishers()
+export async function generateStaticParams() {
+  const publishers = getAllPublishers()
+  const params: { publisher: string; report: string }[] = []
+
+  for (const pub of publishers.filter((p) => p.count >= 3)) {
+    const stats = getStatsForPublisher(pub.publisher)
+    const reportNames = new Set<string>()
+    for (const stat of stats) {
+      if (stat.source_name) reportNames.add(stat.source_name)
+    }
+    for (const name of reportNames) {
+      params.push({
+        publisher: slugify(pub.publisher),
+        report: slugify(name),
+      })
+    }
+  }
+
+  return params
+}
+
+function findPublisherAndReport(pubSlug: string, reportSlug: string) {
+  const publishers = getAllPublishers()
   const pub = publishers.find((p) => slugify(p.publisher) === pubSlug)
   if (!pub) return null
 
-  const stats = await getStatsForPublisher(pub.publisher)
+  const stats = getStatsForPublisher(pub.publisher)
 
-  // Group by source_name
   const reports = new Map<string, typeof stats>()
   for (const stat of stats) {
     const key = stat.source_name || 'Unknown'
@@ -27,7 +47,6 @@ async function findPublisherAndReport(pubSlug: string, reportSlug: string) {
     reports.get(key)!.push(stat)
   }
 
-  // Find matching report
   for (const [name, reportStats] of reports) {
     if (slugify(name) === reportSlug) {
       return { publisher: pub, reportName: name, stats: reportStats, allReports: reports }
