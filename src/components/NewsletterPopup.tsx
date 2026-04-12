@@ -10,7 +10,7 @@ export default function NewsletterPopup() {
   useEffect(() => {
     if (localStorage.getItem('newsletter_dismissed')) return
 
-    const timer = setTimeout(() => setShow(true), 30000)
+    const timer = setTimeout(() => setShow(true), 15000)
     return () => clearTimeout(timer)
   }, [])
 
