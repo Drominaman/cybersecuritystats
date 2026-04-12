@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import NewsletterPopup from '@/components/NewsletterPopup'
 import './globals.css'
 
 const geistSans = Geist({
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <NewsletterPopup />
       </body>
     </html>
   )
