@@ -13,14 +13,14 @@ export default function Icon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#0a0a0a',
+          backgroundColor: '#000000',
         }}
       >
         <span
           style={{
             fontSize: 20,
             fontWeight: 900,
-            color: '#000000',
+            color: '#ffffff',
             fontFamily: 'Arial, Helvetica, sans-serif',
             letterSpacing: '-1px',
           }}
