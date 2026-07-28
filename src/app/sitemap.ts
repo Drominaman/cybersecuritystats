@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getEnabledClusters } from '@/data/clusters'
-import { getAllPublishers, getAllBlogPosts } from '@/lib/static-data'
+import { getAllPublishers, getAllBlogPosts, getStatsForPublisher } from '@/lib/static-data'
 import { slugify } from '@/lib/utils'
 
 const BASE = 'https://cybersecuritystats.com'
@@ -81,6 +81,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     })
+  }
+
+  // Report pages. These are the bulk of the site and 436 of them have no
+  // publisher page linking to them, since publisher pages stop at the top 200
+  // while reports are built for every publisher with 3+ statistics. Without
+  // them here a crawler has no route to those at all.
+  //
+  // The filter has to match generateStaticParams in reports/[publisher]/[report]
+  // exactly — that route sets dynamicParams = false, so anything listed here but
+  // not prebuilt would 404.
+  for (const pub of publishers.filter((p) => p.count >= 3)) {
+    const seen = new Set<string>()
+    for (const stat of getStatsForPublisher(pub.publisher)) {
+      if (!stat.source_name || seen.has(stat.source_name)) continue
+      seen.add(stat.source_name)
+      urls.push({
+        url: `${BASE}/reports/${slugify(pub.publisher)}/${slugify(stat.source_name)}`,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      })
+    }
   }
 
   // Blog

@@ -115,6 +115,43 @@ function normalizePublishers(stats) {
 }
 
 /**
+ * Report titles have the same problem as publisher names: "Fastly Threat
+ * Insights Report" and "Fastly Threat Insights Report " are one report, but
+ * being distinct strings they split into two. Both slugify to one URL, so the
+ * report page shows whichever spelling the lookup happened to find and the
+ * statistics filed under the other are unreachable.
+ */
+function normalizeReportNames(stats) {
+  const variants = new Map()
+  for (const stat of stats) {
+    if (!stat.publisher || !stat.source_name) continue
+    const name = stat.source_name.trim()
+    if (!name) continue
+    const key = `${slugify(stat.publisher)}|${slugify(name)}`
+    if (!variants.has(key)) variants.set(key, new Map())
+    const counts = variants.get(key)
+    counts.set(name, (counts.get(name) || 0) + 1)
+  }
+
+  const canonical = new Map()
+  let merged = 0
+  for (const [key, counts] of variants) {
+    const best = [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0]
+    canonical.set(key, best)
+    if (counts.size > 1) merged++
+  }
+
+  for (const stat of stats) {
+    if (!stat.publisher || !stat.source_name) continue
+    const key = `${slugify(stat.publisher)}|${slugify(stat.source_name.trim())}`
+    const best = canonical.get(key)
+    if (best) stat.source_name = best
+  }
+
+  return merged
+}
+
+/**
  * A handful of rows carry a mistyped year — "52025-05-05", "2926-01-30". Since
  * everything is ordered by published_on, those sort above every real statistic:
  * they take the top of every list and set the "Updated" date on the homepage.
@@ -146,6 +183,9 @@ async function main() {
 
   const merged = normalizePublishers(stats)
   console.log(`Normalized publisher names (${merged} had multiple spellings)`)
+
+  const mergedReports = normalizeReportNames(stats)
+  console.log(`Normalized report titles (${mergedReports} had multiple spellings)`)
 
   const badDates = dropImplausibleDates(stats)
   if (badDates.length) {
