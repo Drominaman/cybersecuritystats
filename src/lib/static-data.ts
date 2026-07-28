@@ -2,16 +2,18 @@
  * Reads pre-fetched data from src/data/generated/*.json
  * No runtime Supabase calls — everything served from build-time snapshots.
  */
-import type { Stat } from '@/types'
+import type { Stat, BlogPost } from '@/types'
 import { INDUSTRY_NORMALIZE, THREAT_NORMALIZE } from '@/data/tag-normalize'
 
 import rawStats from '@/data/generated/stats.json'
 import rawPublishers from '@/data/generated/publishers.json'
 import rawMeta from '@/data/generated/meta.json'
+import rawBlog from '@/data/generated/blog.json'
 
 const stats = rawStats as Stat[]
 const publishers = rawPublishers as { publisher: string; count: number }[]
 const meta = rawMeta as { totalStats: number; uniqueReports: number; publisherCount: number }
+const blogPosts = rawBlog as BlogPost[]
 
 function getStatTags(stat: Stat): string[] {
   return [stat.tag1, stat.tag2, stat.tag3, stat.tag4, stat.tag5]
@@ -87,4 +89,29 @@ export function getStatsForReport(publisherName: string, sourceName: string): St
   return stats.filter(
     (stat) => stat.publisher === publisherName && stat.source_name === sourceName
   )
+}
+
+export function getAllBlogPosts(): BlogPost[] {
+  return blogPosts
+}
+
+export function getBlogPost(slug: string): BlogPost | null {
+  return blogPosts.find((post) => post.slug === slug) ?? null
+}
+
+export function getRelatedBlogPosts(slug: string, limit = 2): BlogPost[] {
+  const current = getBlogPost(slug)
+  if (!current) return []
+
+  const currentTags = new Set((current.tags ?? []).map((t) => t.toLowerCase()))
+
+  return blogPosts
+    .filter((post) => post.slug !== slug)
+    .map((post) => ({
+      post,
+      shared: (post.tags ?? []).filter((t) => currentTags.has(t.toLowerCase())).length,
+    }))
+    .sort((a, b) => b.shared - a.shared)
+    .slice(0, limit)
+    .map(({ post }) => post)
 }

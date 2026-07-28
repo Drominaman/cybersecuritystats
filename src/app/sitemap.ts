@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getEnabledClusters } from '@/data/clusters'
-import { getAllPublishers } from '@/lib/static-data'
+import { getAllPublishers, getAllBlogPosts } from '@/lib/static-data'
 import { slugify } from '@/lib/utils'
 
 const BASE = 'https://cybersecuritystats.com'
@@ -81,6 +81,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     })
+  }
+
+  // Blog
+  const posts = getAllBlogPosts()
+  if (posts.length > 0) {
+    urls.push({
+      url: `${BASE}/blog`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    })
+
+    for (const post of posts) {
+      urls.push({
+        url: `${BASE}/blog/${post.slug}`,
+        lastModified: post.updated_at || post.published_at || undefined,
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      })
+    }
   }
 
   return urls

@@ -21,6 +21,9 @@ export default function Nav() {
           <Link href="/publishers" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
             Publishers
           </Link>
+          <Link href="/blog" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
+            Blog
+          </Link>
           <Link href="/about" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
             About
           </Link>

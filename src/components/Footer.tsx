@@ -74,6 +74,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-1.5">
               <Link href="/publishers" className="text-sm opacity-70 hover:opacity-100 hover:text-[var(--highlight)]">Publishers</Link>
+              <Link href="/blog" className="text-sm opacity-70 hover:opacity-100 hover:text-[var(--highlight)]">Blog</Link>
               <Link href="/about" className="text-sm opacity-70 hover:opacity-100 hover:text-[var(--highlight)]">About</Link>
               <Link href="/author" className="text-sm opacity-70 hover:opacity-100 hover:text-[var(--highlight)]">Author</Link>
               <Link href="/newsletter" className="text-sm opacity-70 hover:opacity-100 hover:text-[var(--highlight)]">Newsletter</Link>

@@ -48,6 +48,23 @@ async function fetchAllStats() {
   return all
 }
 
+async function fetchBlogPosts() {
+  const { data, error } = await supabase
+    .from('blog_posts')
+    .select(
+      'slug,title,excerpt,content,author,author_url,post_type,tags,stat_count,featured,meta_description,published_at,updated_at'
+    )
+    .eq('status', 'published')
+    .order('published_at', { ascending: false })
+
+  if (error) {
+    console.error('Supabase error:', error.message)
+    process.exit(1)
+  }
+
+  return data
+}
+
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 }
@@ -90,7 +107,12 @@ async function main() {
   writeFileSync(join(OUT_DIR, 'reports.json'), JSON.stringify(reports))
   console.log(`Wrote reports.json (${reports.length} reports)`)
 
-  // 4. Count unique source_names
+  // 4. Save published blog posts
+  const posts = await fetchBlogPosts()
+  writeFileSync(join(OUT_DIR, 'blog.json'), JSON.stringify(posts))
+  console.log(`Wrote blog.json (${posts.length} published posts)`)
+
+  // 5. Count unique source_names
   const uniqueReports = new Set(stats.map(s => s.source_name).filter(Boolean))
   writeFileSync(join(OUT_DIR, 'meta.json'), JSON.stringify({
     totalStats: stats.length,
