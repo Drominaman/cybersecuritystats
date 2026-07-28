@@ -17,6 +17,14 @@ function renderBold(text: string, keyPrefix: string): ReactNode[] {
   )
 }
 
+// The post content is machine-generated, so hrefs are data, not code: only
+// web URLs, site paths, and in-page anchors may become links. Anything else
+// (javascript:, data:, etc.) renders as plain text.
+function safeHref(href: string): string | null {
+  if (/^https?:\/\//i.test(href) || href.startsWith('/') || href.startsWith('#')) return href
+  return null
+}
+
 function renderInline(text: string, keyPrefix: string): ReactNode[] {
   const parts: ReactNode[] = []
   const linkPattern = /\[([^\]]+)\]\(([^)]+)\)/g
@@ -29,7 +37,13 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
       parts.push(...renderBold(text.slice(cursor, match.index), `${keyPrefix}-${i}`))
     }
 
-    const [, label, href] = match
+    const [, label, rawHref] = match
+    const href = safeHref(rawHref)
+    if (href === null) {
+      parts.push(...renderBold(label, `${keyPrefix}-${i++}`))
+      cursor = match.index + match[0].length
+      continue
+    }
     const isAnchor = href.startsWith('#')
     parts.push(
       <a

@@ -1,8 +1,11 @@
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
+  // JSON.stringify leaves "</script>" intact, so a title containing it would
+  // close the tag and inject markup. Escaping "<" keeps the JSON valid and
+  // makes breakout impossible regardless of what the data contains.
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
     />
   )
 }
