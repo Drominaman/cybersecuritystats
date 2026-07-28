@@ -114,6 +114,31 @@ function normalizePublishers(stats) {
   return merged
 }
 
+/**
+ * A handful of rows carry a mistyped year — "52025-05-05", "2926-01-30". Since
+ * everything is ordered by published_on, those sort above every real statistic:
+ * they take the top of every list and set the "Updated" date on the homepage.
+ *
+ * The statistic itself is still fine, so keep it and drop only the date we know
+ * is wrong. Guessing the intended year would put an unciteable date next to a
+ * sourced figure, which is worse than showing none.
+ */
+function dropImplausibleDates(stats) {
+  const thisYear = new Date().getFullYear()
+  const suspect = []
+
+  for (const stat of stats) {
+    if (!stat.published_on) continue
+    const year = Number(String(stat.published_on).slice(0, 4))
+    if (!Number.isFinite(year) || year < 1990 || year > thisYear + 1) {
+      suspect.push(`${stat.publisher || 'unknown'}: ${stat.published_on}`)
+      stat.published_on = null
+    }
+  }
+
+  return suspect
+}
+
 async function main() {
   console.log('Fetching all stats from Supabase...')
   const stats = await fetchAllStats()
@@ -121,6 +146,12 @@ async function main() {
 
   const merged = normalizePublishers(stats)
   console.log(`Normalized publisher names (${merged} had multiple spellings)`)
+
+  const badDates = dropImplausibleDates(stats)
+  if (badDates.length) {
+    console.log(`Dropped ${badDates.length} mistyped publication dates (fix these at source):`)
+    for (const entry of [...new Set(badDates)]) console.log(`  ${entry}`)
+  }
 
   mkdirSync(OUT_DIR, { recursive: true })
 
