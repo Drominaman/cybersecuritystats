@@ -17,7 +17,9 @@ export default function Nav() {
           Cybersecurity Statistics
         </Link>
 
-        <div className="hidden md:flex items-center gap-1 text-sm">
+        {/* Six links plus the button only fit from lg; below that the condensed
+            set below takes over rather than letting the button wrap. */}
+        <div className="hidden lg:flex items-center gap-1 text-sm">
           {LINKS.map(([href, label]) => (
             <Link key={href} href={href} className="px-2.5 py-1.5 hover:underline">
               {label}
@@ -25,17 +27,17 @@ export default function Nav() {
           ))}
           <Link
             href="/newsletter"
-            className="ml-2 px-3.5 py-1.5 bg-[var(--accent-bg)] text-[var(--accent-fg)]"
+            className="ml-2 px-3.5 py-1.5 whitespace-nowrap bg-[var(--accent-bg)] text-[var(--accent-fg)]"
           >
             Get the newsletter
           </Link>
         </div>
 
-        {/* Mobile — condensed to the three entry points that matter */}
-        <div className="flex md:hidden items-center gap-3 text-sm">
+        <div className="flex lg:hidden items-center gap-4 text-sm">
           <Link href="/industry/healthcare" className="hover:underline">Industries</Link>
           <Link href="/threats/ransomware" className="hover:underline">Threats</Link>
           <Link href="/publishers" className="hover:underline">Publishers</Link>
+          <Link href="/blog" className="hover:underline">Blog</Link>
         </div>
       </div>
     </nav>
