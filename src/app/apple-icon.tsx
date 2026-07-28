@@ -20,8 +20,8 @@ export default function AppleIcon() {
           style={{
             fontSize: 100,
             fontWeight: 900,
-            color: '#ff3d00',
-            fontFamily: 'monospace',
+            color: '#000000',
+            fontFamily: 'Arial, Helvetica, sans-serif',
             letterSpacing: '-4px',
           }}
         >

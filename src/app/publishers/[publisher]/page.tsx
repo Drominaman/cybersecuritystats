@@ -63,10 +63,10 @@ export default async function PublisherPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
-        <Link href="/publishers" className="hover:text-[var(--accent)]">Publishers</Link>
+        <Link href="/publishers" className="hover:underline">Publishers</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">{titleCase(pub.publisher)}</span>
       </nav>
@@ -76,11 +76,11 @@ export default async function PublisherPage({ params }: Props) {
           {titleCase(pub.publisher)}
         </h1>
         <div className="flex items-center gap-4 mt-4">
-          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 font-mono text-xs font-bold">
-            {formatNumber(stats.length)} STATS
+          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
+            {formatNumber(stats.length)} stats
           </span>
-          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 font-mono text-xs font-bold">
-            {sortedReports.length} REPORTS
+          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 text-xs font-bold">
+            {sortedReports.length} reports
           </span>
         </div>
       </div>
@@ -90,12 +90,12 @@ export default async function PublisherPage({ params }: Props) {
           {/* Report library */}
           <div className="mb-10">
             <div className="flex items-center gap-4 mb-4">
-              <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+              <h2 className="text-xs text-[var(--muted)]">
                 Reports
               </h2>
-              <div className="flex-1 border-t-2 border-[var(--border)]" />
+              <div className="flex-1 border-t border-[var(--border)]" />
             </div>
-            <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
+            <div className="border border-[var(--border)] divide-y divide-[var(--border)]">
               {sortedReports.map(([reportName, reportStats]) => (
                 <Link
                   key={reportName}
@@ -103,7 +103,7 @@ export default async function PublisherPage({ params }: Props) {
                   className="flex items-center justify-between p-3 hover:bg-[var(--surface)] transition-colors"
                 >
                   <span className="text-sm font-medium pr-4">{reportName}</span>
-                  <span className="font-mono text-xs text-[var(--muted)] shrink-0">
+                  <span className="text-xs text-[var(--muted)] shrink-0">
                     {reportStats.length} stats
                   </span>
                 </Link>
@@ -113,10 +113,10 @@ export default async function PublisherPage({ params }: Props) {
 
           {/* All stats */}
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               All Statistics
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
           {stats.slice(0, 50).map((stat, i) => (
             <StatCard key={i} stat={stat} />
@@ -125,15 +125,15 @@ export default async function PublisherPage({ params }: Props) {
 
         <aside className="text-sm">
           {/* Topics covered */}
-          <div className="border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               Topics Covered
             </h2>
             <div className="flex flex-wrap gap-1">
               {topTags.map(([tag, count]) => (
                 <span
                   key={tag}
-                  className="inline-block border border-[var(--border-light)] px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[var(--muted)]"
+                  className="inline-block border border-[var(--border-light)] px-2 py-0.5 text-xs text-xs text-[var(--muted)]"
                 >
                   {tag} ({count})
                 </span>

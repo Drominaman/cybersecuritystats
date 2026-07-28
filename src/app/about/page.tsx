@@ -18,8 +18,8 @@ export default async function AboutPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">About</span>
       </nav>
@@ -42,8 +42,8 @@ export default async function AboutPage() {
           security vendors, government agencies, and industry bodies.
         </p>
 
-        <div className="border-2 border-[var(--border)] p-5 my-8">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-4">
+        <div className="border border-[var(--border)] p-5 my-8">
+          <h2 className="text-xs text-[var(--muted)] mb-4">
             Methodology
           </h2>
           <div className="space-y-4 text-sm">
@@ -71,36 +71,36 @@ export default async function AboutPage() {
           </div>
         </div>
 
-        <div className="border-2 border-[var(--border)] p-5 my-8">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-4">
+        <div className="border border-[var(--border)] p-5 my-8">
+          <h2 className="text-xs text-[var(--muted)] mb-4">
             How to Use This Data
           </h2>
           <div className="space-y-4 text-sm">
             <p>
               <strong>Industry research.</strong> Browse{' '}
-              <Link href="/industry/healthcare" className="text-[var(--accent)] hover:underline">
+              <Link href="/industry/healthcare" className="underline">
                 Healthcare
               </Link>{' '}
               or{' '}
-              <Link href="/industry/financial-services" className="text-[var(--accent)] hover:underline">
+              <Link href="/industry/financial-services" className="underline">
                 Financial Services
               </Link>{' '}
               to see cybersecurity data specific to your sector.
             </p>
             <p>
               <strong>Threat analysis.</strong> Drill into specific threat types like{' '}
-              <Link href="/threats/ransomware" className="text-[var(--accent)] hover:underline">
+              <Link href="/threats/ransomware" className="underline">
                 Ransomware
               </Link>{' '}
               or{' '}
-              <Link href="/threats/phishing" className="text-[var(--accent)] hover:underline">
+              <Link href="/threats/phishing" className="underline">
                 Phishing
               </Link>{' '}
               to understand frequency, cost, and trends.
             </p>
             <p>
               <strong>Cross-reference.</strong> Matrix pages like{' '}
-              <Link href="/industry/healthcare/ransomware" className="text-[var(--accent)] hover:underline">
+              <Link href="/industry/healthcare/ransomware" className="underline">
                 Healthcare Ransomware
               </Link>{' '}
               combine both dimensions, showing only statistics relevant to that

@@ -14,10 +14,10 @@ export default function CopyStatButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="font-mono text-[10px] uppercase tracking-wider text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
+      className="text-xs text-[var(--muted)] hover:underline transition-colors"
       title="Copy stat with source link"
     >
-      {copied ? 'COPIED' : 'COPY'}
+      {copied ? 'Copied' : 'Copy'}
     </button>
   )
 }

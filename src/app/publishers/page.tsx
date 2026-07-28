@@ -15,8 +15,8 @@ export default async function PublishersPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">Publishers</span>
       </nav>
@@ -30,7 +30,7 @@ export default async function PublishersPage() {
         </p>
       </div>
 
-      <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
+      <div className="border border-[var(--border)] divide-y divide-[var(--border)]">
         {publishers.map((pub) => (
           <Link
             key={pub.publisher}
@@ -38,7 +38,7 @@ export default async function PublishersPage() {
             className="flex items-center justify-between p-3 hover:bg-[var(--surface)] transition-colors"
           >
             <span className="text-sm font-bold">{pub.publisher}</span>
-            <span className="font-mono text-xs text-[var(--muted)]">
+            <span className="text-xs text-[var(--muted)]">
               {pub.count} stats
             </span>
           </Link>

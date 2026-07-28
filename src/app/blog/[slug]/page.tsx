@@ -79,10 +79,10 @@ export default async function BlogPostPage({ params }: Props) {
         ])}
       />
 
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
-        <Link href="/blog" className="hover:text-[var(--accent)]">Blog</Link>
+        <Link href="/blog" className="hover:underline">Blog</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">
           {post.post_type === 'roundup' ? 'Roundup' : 'Analysis'}
@@ -94,7 +94,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <p className="text-lg text-[var(--muted)] leading-relaxed mb-6">{post.excerpt}</p>
 
-        <div className="flex flex-wrap items-center gap-3 pb-6 mb-8 border-b-2 border-[var(--border)] font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+        <div className="flex flex-wrap items-center gap-3 pb-6 mb-8 border-b border-[var(--border)] text-xs text-[var(--muted)]">
           <span>{post.post_type === 'roundup' ? 'Roundup' : 'Analysis'}</span>
           {post.published_at && (
             <>
@@ -114,7 +114,7 @@ export default async function BlogPostPage({ params }: Props) {
               href={post.author_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[var(--accent)]"
+              className="hover:underline"
             >
               {post.author}
             </a>
@@ -127,11 +127,11 @@ export default async function BlogPostPage({ params }: Props) {
       </article>
 
       {post.tags && post.tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t-2 border-[var(--border)]">
+        <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t border-[var(--border)]">
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="border-2 border-[var(--border)] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.15em]"
+              className="border border-[var(--border)] px-2 py-1 text-xs"
             >
               {tag}
             </span>
@@ -139,13 +139,13 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       )}
 
-      <div className="border-2 border-[var(--border)] p-5 mt-10">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3">
+      <div className="border border-[var(--border)] p-5 mt-10">
+        <h2 className="text-xs text-[var(--muted)] mb-3">
           Get the data
         </h2>
         <p className="text-sm leading-relaxed">
           Every figure above comes from our index of published research.{' '}
-          <Link href="/newsletter" className="text-[var(--accent)] hover:underline">
+          <Link href="/newsletter" className="underline">
             Subscribe to the newsletter
           </Link>{' '}
           for new statistics as reports are published.
@@ -154,17 +154,17 @@ export default async function BlogPostPage({ params }: Props) {
 
       {related.length > 0 && (
         <div className="mt-10">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-4">
+          <h2 className="text-xs text-[var(--muted)] mb-4">
             More from the blog
           </h2>
-          <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
+          <div className="border border-[var(--border)] divide-y divide-[var(--border)]">
             {related.map((item) => (
               <Link
                 key={item.slug}
                 href={`/blog/${item.slug}`}
                 className="block p-4 hover:bg-[var(--surface)] transition-colors"
               >
-                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-1">
+                <div className="text-xs text-[var(--muted)] mb-1">
                   {item.post_type === 'roundup' ? 'Roundup' : 'Analysis'}
                   {item.published_at && ` / ${formatDate(item.published_at)}`}
                 </div>

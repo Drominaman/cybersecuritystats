@@ -57,8 +57,8 @@ export default async function IndustryPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">{cluster.label}</span>
       </nav>
@@ -68,11 +68,11 @@ export default async function IndustryPage({ params }: Props) {
           <span className="text-[var(--accent)]">{cluster.label}</span> Cybersecurity Statistics
         </h1>
         <div className="flex items-center gap-4 mt-4">
-          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 font-mono text-xs font-bold">
-            {formatNumber(stats.length)} STATS
+          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
+            {formatNumber(stats.length)} stats
           </span>
-          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 font-mono text-xs font-bold">
-            {publishers.length} SOURCES
+          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 text-xs font-bold">
+            {publishers.length} sources
           </span>
         </div>
       </div>
@@ -82,12 +82,12 @@ export default async function IndustryPage({ params }: Props) {
           {/* Threat breakdown */}
           <div className="mb-10">
             <div className="flex items-center gap-4 mb-4">
-              <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+              <h2 className="text-xs text-[var(--muted)]">
                 Top Threats in {cluster.label}
               </h2>
-              <div className="flex-1 border-t-2 border-[var(--border)]" />
+              <div className="flex-1 border-t border-[var(--border)]" />
             </div>
-            <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
+            <div className="border border-[var(--border)] divide-y divide-[var(--border)]">
               {topThreats.map(([threat, count]) => (
                 <Link
                   key={threat}
@@ -95,7 +95,7 @@ export default async function IndustryPage({ params }: Props) {
                   className="flex items-center justify-between p-3 text-sm font-bold hover:bg-[var(--surface)] transition-colors"
                 >
                   <span>{threat}</span>
-                  <span className="text-[var(--muted)] font-mono text-xs">{count}</span>
+                  <span className="text-[var(--muted)] text-xs">{count}</span>
                 </Link>
               ))}
             </div>
@@ -103,10 +103,10 @@ export default async function IndustryPage({ params }: Props) {
 
           {/* Recent stats */}
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Latest Statistics
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
           {stats.slice(0, 30).map((stat, i) => (
             <StatCard key={i} stat={stat} />
@@ -115,8 +115,8 @@ export default async function IndustryPage({ params }: Props) {
 
         <aside className="text-sm">
           {/* Matrix links for this industry */}
-          <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="mb-8 border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               Browse by Threat
             </h2>
             <div className="flex flex-col gap-0.5">
@@ -124,7 +124,7 @@ export default async function IndustryPage({ params }: Props) {
                 <Link
                   key={threat}
                   href={`/industry/${industry}/${slugify(threat)}`}
-                  className="py-1.5 font-mono text-xs uppercase tracking-wider text-[var(--muted)] hover:text-[var(--accent)]"
+                  className="py-1.5 text-xs text-[var(--muted)] hover:underline"
                 >
                   {cluster.label} &times; {threat}
                 </Link>
@@ -133,8 +133,8 @@ export default async function IndustryPage({ params }: Props) {
           </div>
 
           {/* Other industries */}
-          <div className="border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               Other Industries
             </h2>
             <div className="flex flex-col gap-0.5">
@@ -144,7 +144,7 @@ export default async function IndustryPage({ params }: Props) {
                   <Link
                     key={c.id}
                     href={`/industry/${c.id}`}
-                    className="py-1.5 font-mono text-xs uppercase tracking-wider text-[var(--muted)] hover:text-[var(--accent)]"
+                    className="py-1.5 text-xs text-[var(--muted)] hover:underline"
                   >
                     {c.label}
                   </Link>

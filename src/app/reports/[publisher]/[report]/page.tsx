@@ -91,10 +91,10 @@ export default async function ReportPage({ params }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
-        <Link href={`/publishers/${pubSlug}`} className="hover:text-[var(--accent)]">
+        <Link href={`/publishers/${pubSlug}`} className="hover:underline">
           {pub.publisher}
         </Link>
         <span className="mx-2">/</span>
@@ -102,18 +102,18 @@ export default async function ReportPage({ params }: Props) {
       </nav>
 
       <div className="mb-10">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-2">
+        <p className="text-xs text-[var(--muted)] mb-2">
           Report by {pub.publisher}
         </p>
         <h1 className="text-3xl font-black tracking-tighter leading-tight mb-4">
           {reportName}
         </h1>
         <div className="flex items-center gap-4">
-          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 font-mono text-xs font-bold">
+          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
             {stats.length} FINDINGS
           </span>
           {publishDate && (
-            <span className="font-mono text-xs text-[var(--muted)]">
+            <span className="text-xs text-[var(--muted)]">
               Published {formatDate(publishDate)}
             </span>
           )}
@@ -123,7 +123,7 @@ export default async function ReportPage({ params }: Props) {
             href={sourceLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-4 border-2 border-[var(--accent)] text-[var(--accent)] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] transition-colors"
+            className="inline-block mt-4 border border-[var(--accent)] text-[var(--accent)] px-4 py-2 text-sm font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] transition-colors"
           >
             View Original Report &rarr;
           </a>
@@ -133,10 +133,10 @@ export default async function ReportPage({ params }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12">
         <div>
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Key Findings
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
           {stats.map((stat, i) => (
             <StatCard key={i} stat={stat} />
@@ -146,8 +146,8 @@ export default async function ReportPage({ params }: Props) {
         <aside className="text-sm">
           {/* Other reports from same publisher */}
           {otherReports.length > 0 && (
-            <div className="border-2 border-[var(--border)] p-4">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <div className="border border-[var(--border)] p-4">
+              <h3 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
                 More from {pub.publisher}
               </h3>
               <div className="flex flex-col gap-1">
@@ -155,7 +155,7 @@ export default async function ReportPage({ params }: Props) {
                   <Link
                     key={name}
                     href={`/reports/${pubSlug}/${slugify(name)}`}
-                    className="text-[var(--muted)] hover:text-[var(--accent)] py-1 text-xs leading-snug"
+                    className="text-[var(--muted)] hover:underline py-1 text-xs leading-snug"
                   >
                     {name} ({reportStats.length})
                   </Link>

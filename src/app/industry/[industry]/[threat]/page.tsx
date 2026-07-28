@@ -88,10 +88,10 @@ export default async function MatrixPage({ params }: Props) {
         { name: match.threat, url: `https://cybersecuritystats.com/industry/${industry}/${slugify(match.threat)}` },
       ])} />
       {/* Breadcrumb */}
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
-        <Link href={`/industry/${industry}`} className="hover:text-[var(--accent)]">
+        <Link href={`/industry/${industry}`} className="hover:underline">
           {match.cluster.label}
         </Link>
         <span className="mx-2">/</span>
@@ -106,11 +106,11 @@ export default async function MatrixPage({ params }: Props) {
           Statistics
         </h1>
         <div className="flex items-center gap-4 mt-4">
-          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 font-mono text-xs font-bold">
-            {stats.length} STATS
+          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
+            {stats.length} stats
           </span>
-          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 font-mono text-xs font-bold">
-            {publishers.length} SOURCES
+          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 text-xs font-bold">
+            {publishers.length} sources
           </span>
         </div>
       </div>
@@ -128,8 +128,8 @@ export default async function MatrixPage({ params }: Props) {
         {/* Sidebar */}
         <aside className="text-sm">
           {/* Same industry, other threats */}
-          <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="mb-8 border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               {match.cluster.label} Threats
             </h2>
             <div className="flex flex-col gap-0.5">
@@ -137,7 +137,7 @@ export default async function MatrixPage({ params }: Props) {
                 <Link
                   key={t}
                   href={`/industry/${industry}/${slugify(t)}`}
-                  className={`py-1.5 font-mono text-xs uppercase tracking-wider hover:text-[var(--accent)] ${
+                  className={`py-1.5 text-xs hover:underline ${
                     t === match.threat
                       ? 'font-bold text-[var(--foreground)] bg-[var(--highlight)] px-2 -mx-2'
                       : 'text-[var(--muted)]'
@@ -150,8 +150,8 @@ export default async function MatrixPage({ params }: Props) {
           </div>
 
           {/* Same threat, other industries */}
-          <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="mb-8 border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               {match.threat} by Industry
             </h2>
             <div className="flex flex-col gap-0.5">
@@ -161,7 +161,7 @@ export default async function MatrixPage({ params }: Props) {
                   <Link
                     key={c.id}
                     href={`/industry/${c.id}/${slugify(match.threat)}`}
-                    className={`py-1.5 font-mono text-xs uppercase tracking-wider hover:text-[var(--accent)] ${
+                    className={`py-1.5 text-xs hover:underline ${
                       c.id === industry
                         ? 'font-bold text-[var(--foreground)] bg-[var(--highlight)] px-2 -mx-2'
                         : 'text-[var(--muted)]'
@@ -175,8 +175,8 @@ export default async function MatrixPage({ params }: Props) {
 
           {/* Sources */}
           {publishers.length > 0 && (
-            <div className="border-2 border-[var(--border)] p-4">
-              <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+            <div className="border border-[var(--border)] p-4">
+              <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
                 Sources
               </h2>
               <div className="flex flex-col gap-0.5">
@@ -184,7 +184,7 @@ export default async function MatrixPage({ params }: Props) {
                   <Link
                     key={pub}
                     href={`/publishers/${slugify(pub)}`}
-                    className="text-[var(--muted)] hover:text-[var(--accent)] py-1 text-xs"
+                    className="text-[var(--muted)] hover:underline py-1 text-xs"
                   >
                     {pub}
                   </Link>

@@ -44,10 +44,10 @@ export default function NewsletterPopup() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60" onClick={dismiss} />
-      <div className="relative bg-[var(--background)] border-4 border-[var(--border)] max-w-md w-full">
+      <div className="relative bg-[var(--background)] border border-[var(--border)] max-w-md w-full">
         <button
           onClick={dismiss}
-          className="absolute top-3 right-3 font-mono text-[10px] font-bold text-[var(--muted)] hover:text-[var(--foreground)] z-10 bg-[var(--background)] px-2 py-1"
+          className="absolute top-3 right-3 text-xs font-bold text-[var(--muted)] hover:text-[var(--foreground)] z-10 bg-[var(--background)] px-2 py-1"
         >
           CLOSE &times;
         </button>

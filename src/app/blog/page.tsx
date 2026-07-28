@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 function PostRow({ post }: { post: BlogPost }) {
   return (
     <Link href={`/blog/${post.slug}`} className="block p-5 hover:bg-[var(--surface)] transition-colors">
-      <div className="flex items-center gap-3 mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+      <div className="flex items-center gap-3 mb-2 text-xs text-[var(--muted)]">
         <span>{post.post_type === 'roundup' ? 'Roundup' : 'Analysis'}</span>
         {post.published_at && (
           <>
@@ -42,8 +42,8 @@ export default async function BlogPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">Blog</span>
       </nav>
@@ -56,13 +56,13 @@ export default async function BlogPage() {
       </div>
 
       {posts.length > 0 ? (
-        <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
+        <div className="border border-[var(--border)] divide-y divide-[var(--border)]">
           {posts.map((post) => (
             <PostRow key={post.slug} post={post} />
           ))}
         </div>
       ) : (
-        <div className="border-2 border-[var(--border)] p-8 text-sm text-[var(--muted)]">
+        <div className="border border-[var(--border)] p-8 text-sm text-[var(--muted)]">
           No posts published yet.
         </div>
       )}

@@ -59,11 +59,11 @@ export default async function HomePage() {
       })} />
 
       {/* Hero — left-aligned, editorial feel */}
-      <div className="border-b-4 border-[var(--border)]">
+      <div className="border-b border-[var(--border)]">
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 items-start">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-4">
+              <p className="text-xs text-[var(--muted)] mb-4">
                 Updated {formatDate(getMostRecentDate())}
               </p>
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.95] mb-6">
@@ -77,13 +77,13 @@ export default async function HomePage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/industry/healthcare"
-                  className="border-2 border-[var(--border)] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
+                  className="border border-[var(--border)] px-5 py-2.5 text-sm font-bold hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
                 >
                   Browse by Industry
                 </Link>
                 <Link
                   href="/threats/ransomware"
-                  className="bg-[var(--accent)] text-[var(--accent-fg)] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity"
+                  className="bg-[var(--accent)] text-[var(--accent-fg)] px-5 py-2.5 text-sm font-bold hover:opacity-90 transition-opacity"
                 >
                   Browse by Topic
                 </Link>
@@ -91,32 +91,32 @@ export default async function HomePage() {
             </div>
 
             {/* Featured stat — editorial hook */}
-            <div className="border-2 border-[var(--border)] p-6 bg-[var(--surface)]">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)] mb-3">
+            <div className="border border-[var(--border)] p-6 bg-[var(--surface)]">
+              <p className="text-xs text-[var(--accent)] mb-3">
                 Featured Stat
               </p>
               <p className="text-[15px] font-medium leading-relaxed mb-4">
                 &ldquo;{featuredStat}&rdquo;
               </p>
-              <p className="font-mono text-[10px] uppercase tracking-wider text-[var(--muted)]">
+              <p className="text-xs text-[var(--muted)]">
                 {featuredSource}
               </p>
             </div>
           </div>
 
           {/* Quick stats bar */}
-          <div className="mt-12 pt-6 border-t-2 border-[var(--border)] flex flex-wrap gap-6 md:gap-8">
+          <div className="mt-12 pt-6 border-t border-[var(--border)] flex flex-wrap gap-6 md:gap-8">
             <div>
               <span className="text-2xl font-black">{totalStats.toLocaleString()}</span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] ml-2">statistics</span>
+              <span className="text-xs text-[var(--muted)] ml-2">statistics</span>
             </div>
             <div>
               <span className="text-2xl font-black">{reportCount.toLocaleString()}</span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] ml-2">reports</span>
+              <span className="text-xs text-[var(--muted)] ml-2">reports</span>
             </div>
             <div>
               <span className="text-2xl font-black">{publishers.length}</span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] ml-2">publishers</span>
+              <span className="text-xs text-[var(--muted)] ml-2">publishers</span>
             </div>
           </div>
         </div>
@@ -126,10 +126,10 @@ export default async function HomePage() {
         {/* Industries section — with real counts */}
         <div className="py-12">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Browse by Industry
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -137,13 +137,13 @@ export default async function HomePage() {
               <Link
                 key={cluster.id}
                 href={`/industry/${cluster.id}`}
-                className="border-2 border-[var(--border)] p-6 hover:bg-[var(--surface)] transition-colors group"
+                className="border border-[var(--border)] p-6 hover:bg-[var(--surface)] transition-colors group"
               >
                 <div className="flex items-start justify-between">
-                  <h3 className="text-xl font-black uppercase tracking-tight group-hover:text-[var(--accent)]">
+                  <h3 className="text-xl font-bold tracking-tight group-hover:underline">
                     {cluster.label}
                   </h3>
-                  <span className="font-mono text-xs text-[var(--muted)]">
+                  <span className="text-xs text-[var(--muted)]">
                     {cluster.statCount} stats &middot; {cluster.sourceCount} sources
                   </span>
                 </div>
@@ -151,7 +151,7 @@ export default async function HomePage() {
                   {cluster.threats.map((threat) => (
                     <span
                       key={threat}
-                      className="inline-block border border-[var(--border-light)] px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-[var(--muted)]"
+                      className="inline-block border border-[var(--border-light)] px-2 py-0.5 text-xs text-xs text-[var(--muted)]"
                     >
                       {threat}
                     </span>
@@ -163,15 +163,15 @@ export default async function HomePage() {
         </div>
 
         {/* Topics section — with real counts */}
-        <div className="py-12 border-t-2 border-[var(--border)]">
+        <div className="py-12 border-t border-[var(--border)]">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Browse by Topic
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
             <Link
               href="/threats/ransomware"
-              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)] hover:underline"
+              className="text-xs underline"
             >
               View All &rarr;
             </Link>
@@ -182,13 +182,13 @@ export default async function HomePage() {
               <Link
                 key={threat.slug}
                 href={`/threats/${threat.slug}`}
-                className="border-2 border-[var(--border)] p-5 hover:bg-[var(--surface)] transition-colors group"
+                className="border border-[var(--border)] p-5 hover:bg-[var(--surface)] transition-colors group"
               >
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-lg font-black tracking-tight group-hover:text-[var(--accent)]">
+                  <h3 className="text-lg font-black tracking-tight group-hover:underline">
                     {threat.name}
                   </h3>
-                  <span className="font-mono text-[10px] text-[var(--muted)] shrink-0">
+                  <span className="text-xs text-[var(--muted)] shrink-0">
                     {threat.statCount}
                   </span>
                 </div>
@@ -201,12 +201,12 @@ export default async function HomePage() {
         </div>
 
         {/* Compare section */}
-        <div className="py-12 border-t-2 border-[var(--border)]">
+        <div className="py-12 border-t border-[var(--border)]">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Compare
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -214,9 +214,9 @@ export default async function HomePage() {
               <Link
                 key={comp.slug}
                 href={`/compare/${comp.slug}`}
-                className="border-2 border-[var(--border)] p-4 text-center hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:border-[var(--accent)] transition-colors"
+                className="border border-[var(--border)] p-4 text-center hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:border-[var(--accent)] transition-colors"
               >
-                <span className="font-mono text-xs font-bold uppercase tracking-wider">
+                <span className="text-sm font-bold">
                   {comp.a} vs {comp.b}
                 </span>
               </Link>
@@ -225,15 +225,15 @@ export default async function HomePage() {
         </div>
 
         {/* Top publishers */}
-        <div className="py-12 border-t-2 border-[var(--border)]">
+        <div className="py-12 border-t border-[var(--border)]">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Top Publishers
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
             <Link
               href="/publishers"
-              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--accent)] hover:underline"
+              className="text-xs underline"
             >
               View All {publishers.length} &rarr;
             </Link>
@@ -244,10 +244,10 @@ export default async function HomePage() {
               <Link
                 key={pub.publisher}
                 href={`/publishers/${slugify(pub.publisher)}`}
-                className="border-2 border-[var(--border)] p-4 hover:bg-[var(--surface)] transition-colors"
+                className="border border-[var(--border)] p-4 hover:bg-[var(--surface)] transition-colors"
               >
                 <span className="text-sm font-bold block truncate">{pub.publisher}</span>
-                <span className="font-mono text-[10px] text-[var(--muted)] uppercase tracking-wider mt-1 block">
+                <span className="text-xs text-[var(--muted)] mt-1 block">
                   {pub.count} stats
                 </span>
               </Link>
@@ -256,17 +256,17 @@ export default async function HomePage() {
         </div>
 
         {/* About blurb with editorial voice */}
-        <div className="py-12 border-t-2 border-[var(--border)]">
+        <div className="py-12 border-t border-[var(--border)]">
           <div className="max-w-xl">
             <p className="text-sm leading-relaxed">
               Built for security researchers, analysts, and CISOs who need data, not marketing.
               Every statistic links to its original source report.{' '}
-              <Link href="/about" className="text-[var(--accent)] hover:underline">
+              <Link href="/about" className="underline">
                 Read about our methodology &rarr;
               </Link>
             </p>
             <p className="text-xs text-[var(--muted)] mt-3">
-              Curated by <Link href="/author" className="hover:text-[var(--accent)]">Laura Martisiute</Link>. Last updated April 2026.
+              Curated by <Link href="/author" className="hover:underline">Laura Martisiute</Link>. Last updated April 2026.
             </p>
           </div>
         </div>

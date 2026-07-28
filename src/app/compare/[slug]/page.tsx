@@ -66,8 +66,8 @@ export default async function ComparePage({ params }: Props) {
         { name: 'Home', url: 'https://cybersecuritystats.com' },
         { name: `${comp.a} vs ${comp.b}`, url: `https://cybersecuritystats.com/compare/${slug}` },
       ])} />
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">Compare</span>
       </nav>
@@ -81,8 +81,8 @@ export default async function ComparePage({ params }: Props) {
 
       {/* Side by side stats summary */}
       <div className="grid grid-cols-2 gap-4 mb-12">
-        <div className="border-2 border-[var(--border)] p-5">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3">
+        <div className="border border-[var(--border)] p-5">
+          <h2 className="text-xs text-[var(--muted)] mb-3">
             {comp.a}
           </h2>
           <p className="text-3xl font-black">{formatNumber(statsA.length)}</p>
@@ -90,8 +90,8 @@ export default async function ComparePage({ params }: Props) {
             statistics from {publishersA.size} sources
           </p>
         </div>
-        <div className="border-2 border-[var(--border)] p-5">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3">
+        <div className="border border-[var(--border)] p-5">
+          <h2 className="text-xs text-[var(--muted)] mb-3">
             {comp.b}
           </h2>
           <p className="text-3xl font-black">{formatNumber(statsB.length)}</p>
@@ -105,34 +105,34 @@ export default async function ComparePage({ params }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Latest {comp.a}
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
           {statsA.slice(0, 15).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
           <Link
             href={`/threats/${slugify(comp.a)}`}
-            className="inline-block mt-4 border-2 border-[var(--border)] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
+            className="inline-block mt-4 border border-[var(--border)] px-4 py-2 text-sm font-bold hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
           >
             View all {comp.a} &rarr;
           </Link>
         </div>
         <div>
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Latest {comp.b}
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
           {statsB.slice(0, 15).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
           <Link
             href={`/threats/${slugify(comp.b)}`}
-            className="inline-block mt-4 border-2 border-[var(--border)] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
+            className="inline-block mt-4 border border-[var(--border)] px-4 py-2 text-sm font-bold hover:bg-[var(--foreground)] hover:text-[var(--background)] transition-colors"
           >
             View all {comp.b} &rarr;
           </Link>
@@ -142,17 +142,17 @@ export default async function ComparePage({ params }: Props) {
       {/* Other comparisons */}
       <div className="mt-16">
         <div className="flex items-center gap-4 mb-4">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+          <h2 className="text-xs text-[var(--muted)]">
             Other Comparisons
           </h2>
-          <div className="flex-1 border-t-2 border-[var(--border)]" />
+          <div className="flex-1 border-t border-[var(--border)]" />
         </div>
         <div className="flex flex-wrap gap-2">
           {COMPARISONS.filter((c) => makeSlug(c.a, c.b) !== slug).map((c) => (
             <Link
               key={makeSlug(c.a, c.b)}
               href={`/compare/${makeSlug(c.a, c.b)}`}
-              className="border-2 border-[var(--border)] px-3 py-1.5 text-xs font-mono font-bold uppercase tracking-wider hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:border-[var(--accent)] transition-colors"
+              className="border border-[var(--border)] px-3 py-1.5 text-xs font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] hover:border-[var(--accent)] transition-colors"
             >
               {c.a} vs {c.b}
             </Link>

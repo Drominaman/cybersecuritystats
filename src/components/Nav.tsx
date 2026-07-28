@@ -1,44 +1,41 @@
 import Link from 'next/link'
 
+const LINKS: [string, string][] = [
+  ['/industry/healthcare', 'Industries'],
+  ['/threats/ransomware', 'Threats'],
+  ['/compare/ransomware-vs-phishing', 'Compare'],
+  ['/publishers', 'Publishers'],
+  ['/blog', 'Blog'],
+  ['/about', 'About'],
+]
+
 export default function Nav() {
   return (
-    <nav className="border-b-4 border-[var(--border)]">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="font-mono text-xs font-black uppercase tracking-[0.15em] shrink-0">
-          CyberSecurityStats
+    <nav className="sticky top-0 z-40 bg-[var(--background)] border-b border-[var(--border)]">
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+        <Link href="/" className="text-base font-bold shrink-0">
+          Cybersecurity Statistics
         </Link>
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 text-sm">
-          <Link href="/industry/healthcare" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Industries
-          </Link>
-          <Link href="/threats/ransomware" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Threats
-          </Link>
-          <Link href="/compare/ransomware-vs-phishing" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Compare
-          </Link>
-          <Link href="/publishers" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Publishers
-          </Link>
-          <Link href="/blog" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Blog
-          </Link>
-          <Link href="/about" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            About
+
+        <div className="hidden md:flex items-center gap-1 text-sm">
+          {LINKS.map(([href, label]) => (
+            <Link key={href} href={href} className="px-2.5 py-1.5 hover:underline">
+              {label}
+            </Link>
+          ))}
+          <Link
+            href="/newsletter"
+            className="ml-2 px-3.5 py-1.5 bg-[var(--accent-bg)] text-[var(--accent-fg)]"
+          >
+            Get the newsletter
           </Link>
         </div>
-        {/* Mobile nav — condensed */}
-        <div className="flex md:hidden items-center gap-4 text-xs">
-          <Link href="/industry/healthcare" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Industries
-          </Link>
-          <Link href="/threats/ransomware" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            Threats
-          </Link>
-          <Link href="/publishers" className="text-[var(--muted)] hover:text-[var(--foreground)] font-medium">
-            More
-          </Link>
+
+        {/* Mobile — condensed to the three entry points that matter */}
+        <div className="flex md:hidden items-center gap-3 text-sm">
+          <Link href="/industry/healthcare" className="hover:underline">Industries</Link>
+          <Link href="/threats/ransomware" className="hover:underline">Threats</Link>
+          <Link href="/publishers" className="hover:underline">Publishers</Link>
         </div>
       </div>
     </nav>

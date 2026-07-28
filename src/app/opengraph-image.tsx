@@ -14,10 +14,10 @@ export default function OgImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          backgroundColor: '#fffdf5',
+          backgroundColor: '#ffffff',
           padding: '80px',
-          borderTop: '8px solid #0a0a0a',
-          borderBottom: '8px solid #0a0a0a',
+          borderTop: '2px solid #000000',
+          borderBottom: '2px solid #000000',
         }}
       >
         <div
@@ -25,13 +25,13 @@ export default function OgImage() {
             fontSize: 14,
             fontWeight: 700,
             color: '#555555',
-            fontFamily: 'monospace',
+            fontFamily: 'Arial, Helvetica, sans-serif',
             textTransform: 'uppercase',
             letterSpacing: '4px',
             marginBottom: '24px',
           }}
         >
-          CYBERSECURITYSTATS.COM
+          cybersecuritystats.com
         </div>
         <div
           style={{
@@ -49,7 +49,7 @@ export default function OgImage() {
           style={{
             fontSize: 72,
             fontWeight: 900,
-            color: '#ff3d00',
+            color: '#000000',
             lineHeight: 0.95,
             letterSpacing: '-3px',
             marginBottom: '40px',

@@ -76,8 +76,8 @@ export default async function ThreatPage({ params }: Props) {
         { name: 'Home', url: 'https://cybersecuritystats.com' },
         { name: label, url: `https://cybersecuritystats.com/threats/${threat}` },
       ])} />
-      <nav className="text-[10px] text-[var(--muted)] mb-10 font-mono uppercase tracking-[0.2em]">
-        <Link href="/" className="hover:text-[var(--accent)]">Home</Link>
+      <nav className="text-xs text-[var(--muted)] mb-10 text-xs">
+        <Link href="/" className="hover:underline">Home</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--foreground)]">{label}</span>
       </nav>
@@ -87,11 +87,11 @@ export default async function ThreatPage({ params }: Props) {
           <span className="text-[var(--accent)]">{label}</span> Statistics
         </h1>
         <div className="flex items-center gap-4 mt-4">
-          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 font-mono text-xs font-bold">
-            {formatNumber(stats.length)} STATS
+          <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
+            {formatNumber(stats.length)} stats
           </span>
-          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 font-mono text-xs font-bold">
-            {publishers.length} SOURCES
+          <span className="bg-[var(--accent)] text-[var(--accent-fg)] px-3 py-1 text-xs font-bold">
+            {publishers.length} sources
           </span>
         </div>
       </div>
@@ -102,12 +102,12 @@ export default async function ThreatPage({ params }: Props) {
           {topIndustries.length > 0 && (
             <div className="mb-10">
               <div className="flex items-center gap-4 mb-4">
-                <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+                <h2 className="text-xs text-[var(--muted)]">
                   {label} by Industry
                 </h2>
-                <div className="flex-1 border-t-2 border-[var(--border)]" />
+                <div className="flex-1 border-t border-[var(--border)]" />
               </div>
-              <div className="border-2 border-[var(--border)] divide-y-2 divide-[var(--border)]">
+              <div className="border border-[var(--border)] divide-y divide-[var(--border)]">
                 {topIndustries.map(([industry, count]) => {
                   const cluster = clusters.find((c) => c.industry === industry)
                   return (
@@ -116,8 +116,8 @@ export default async function ThreatPage({ params }: Props) {
                       href={cluster ? `/industry/${cluster.id}/${threat}` : `/threats/${threat}`}
                       className="flex items-center justify-between p-3 hover:bg-[var(--surface)] transition-colors"
                     >
-                      <span className="text-sm font-bold hover:text-[var(--accent)]">{industry}</span>
-                      <span className="font-mono text-xs text-[var(--muted)]">{count}</span>
+                      <span className="text-sm font-bold hover:underline">{industry}</span>
+                      <span className="text-xs text-[var(--muted)]">{count}</span>
                     </Link>
                   )
                 })}
@@ -127,10 +127,10 @@ export default async function ThreatPage({ params }: Props) {
 
           {/* Stats */}
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            <h2 className="text-xs text-[var(--muted)]">
               Latest Statistics
             </h2>
-            <div className="flex-1 border-t-2 border-[var(--border)]" />
+            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
           {stats.slice(0, 40).map((stat, i) => (
             <StatCard key={i} stat={stat} />
@@ -139,8 +139,8 @@ export default async function ThreatPage({ params }: Props) {
 
         <aside className="text-sm">
           {/* Other threats */}
-          <div className="mb-8 border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="mb-8 border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               All Threats
             </h2>
             <div className="flex flex-col gap-0.5">
@@ -148,7 +148,7 @@ export default async function ThreatPage({ params }: Props) {
                 <Link
                   key={slug}
                   href={`/threats/${slug}`}
-                  className={`py-1.5 font-mono text-xs uppercase tracking-wider hover:text-[var(--accent)] ${
+                  className={`py-1.5 text-xs hover:underline ${
                     slug === threat
                       ? 'font-bold text-[var(--foreground)] bg-[var(--highlight)] px-2 -mx-2'
                       : 'text-[var(--muted)]'
@@ -161,8 +161,8 @@ export default async function ThreatPage({ params }: Props) {
           </div>
 
           {/* Top sources */}
-          <div className="border-2 border-[var(--border)] p-4">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--muted)] mb-3 pb-2 border-b-2 border-[var(--border)]">
+          <div className="border border-[var(--border)] p-4">
+            <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
               Top Sources
             </h2>
             <div className="flex flex-col gap-0.5">
@@ -170,7 +170,7 @@ export default async function ThreatPage({ params }: Props) {
                 <Link
                   key={pub}
                   href={`/publishers/${slugify(pub)}`}
-                  className="text-[var(--muted)] hover:text-[var(--accent)] py-1 text-xs"
+                  className="text-[var(--muted)] hover:underline py-1 text-xs"
                 >
                   {pub}
                 </Link>

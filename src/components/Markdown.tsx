@@ -50,7 +50,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
         key={`${keyPrefix}-l${i++}`}
         href={href}
         {...(isAnchor ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
-        className="text-[var(--accent)] hover:underline"
+        className="underline"
       >
         {label}
       </a>
@@ -107,7 +107,7 @@ export default function Markdown({ content }: { content: string }) {
         <h2
           key={key++}
           id={slugify(text)}
-          className="text-2xl font-black tracking-tighter mt-12 mb-4 pb-2 border-b-2 border-[var(--border)] scroll-mt-24"
+          className="text-2xl font-black tracking-tighter mt-12 mb-4 pb-2 border-b border-[var(--border)] scroll-mt-24"
         >
           {text}
         </h2>
@@ -119,7 +119,7 @@ export default function Markdown({ content }: { content: string }) {
         <h2
           key={key++}
           id={slugify(text)}
-          className="text-2xl font-black tracking-tighter mt-12 mb-4 pb-2 border-b-2 border-[var(--border)] scroll-mt-24"
+          className="text-2xl font-black tracking-tighter mt-12 mb-4 pb-2 border-b border-[var(--border)] scroll-mt-24"
         >
           {text}
         </h2>
