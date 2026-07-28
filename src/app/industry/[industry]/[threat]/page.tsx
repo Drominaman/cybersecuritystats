@@ -130,7 +130,7 @@ export default async function MatrixPage({ params }: Props) {
           {/* Same industry, other threats */}
           <div className="mb-8 border border-[var(--border)] p-4">
             <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
-              {match.cluster.label} Threats
+              {match.cluster.label} Topics
             </h2>
             <div className="flex flex-col gap-0.5">
               {match.cluster.threats.map((t) => (

@@ -72,7 +72,7 @@ export default async function HomePage() {
               </h1>
               <p className="text-lg text-[var(--muted)] mb-8 max-w-lg">
                 {totalStats.toLocaleString()} data points from {reportCount.toLocaleString()} industry reports.
-                Browse by sector, threat type, or publisher.
+                Browse by sector, topic, or publisher.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
@@ -126,10 +126,9 @@ export default async function HomePage() {
         {/* Industries section — with real counts */}
         <div className="py-12">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="text-xs text-[var(--muted)]">
+            <h2 className="text-lg font-bold">
               Browse by Industry
             </h2>
-            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -163,12 +162,11 @@ export default async function HomePage() {
         </div>
 
         {/* Topics section — with real counts */}
-        <div className="py-12 border-t border-[var(--border)]">
+        <div className="py-12">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="text-xs text-[var(--muted)]">
+            <h2 className="text-lg font-bold">
               Browse by Topic
             </h2>
-            <div className="flex-1 border-t border-[var(--border)]" />
             <Link
               href="/threats/ransomware"
               className="text-xs underline"
@@ -201,12 +199,11 @@ export default async function HomePage() {
         </div>
 
         {/* Compare section */}
-        <div className="py-12 border-t border-[var(--border)]">
+        <div className="py-12">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="text-xs text-[var(--muted)]">
+            <h2 className="text-lg font-bold">
               Compare
             </h2>
-            <div className="flex-1 border-t border-[var(--border)]" />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -225,12 +222,11 @@ export default async function HomePage() {
         </div>
 
         {/* Top publishers */}
-        <div className="py-12 border-t border-[var(--border)]">
+        <div className="py-12">
           <div className="flex items-center gap-4 mb-6">
-            <h2 className="text-xs text-[var(--muted)]">
+            <h2 className="text-lg font-bold">
               Top Publishers
             </h2>
-            <div className="flex-1 border-t border-[var(--border)]" />
             <Link
               href="/publishers"
               className="text-xs underline"
@@ -256,7 +252,7 @@ export default async function HomePage() {
         </div>
 
         {/* About blurb with editorial voice */}
-        <div className="py-12 border-t border-[var(--border)]">
+        <div className="py-12">
           <div className="max-w-xl">
             <p className="text-sm leading-relaxed">
               Built for security researchers, analysts, and CISOs who need data, not marketing.

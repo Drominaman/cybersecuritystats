@@ -141,7 +141,7 @@ export default async function ThreatPage({ params }: Props) {
           {/* Other threats */}
           <div className="mb-8 border border-[var(--border)] p-4">
             <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
-              All Threats
+              All Topics
             </h2>
             <div className="flex flex-col gap-0.5">
               {Object.entries(THREAT_LABELS).map(([slug, name]) => (

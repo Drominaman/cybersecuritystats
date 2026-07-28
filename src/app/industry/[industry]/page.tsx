@@ -83,7 +83,7 @@ export default async function IndustryPage({ params }: Props) {
           <div className="mb-10">
             <div className="flex items-center gap-4 mb-4">
               <h2 className="text-xs text-[var(--muted)]">
-                Top Threats in {cluster.label}
+                Top Topics in {cluster.label}
               </h2>
               <div className="flex-1 border-t border-[var(--border)]" />
             </div>
@@ -117,7 +117,7 @@ export default async function IndustryPage({ params }: Props) {
           {/* Matrix links for this industry */}
           <div className="mb-8 border border-[var(--border)] p-4">
             <h2 className="text-xs text-[var(--muted)] mb-3 pb-2 border-b border-[var(--border)]">
-              Browse by Threat
+              Browse by Topic
             </h2>
             <div className="flex flex-col gap-0.5">
               {cluster.threats.map((threat) => (

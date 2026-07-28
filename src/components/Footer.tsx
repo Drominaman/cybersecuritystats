@@ -43,7 +43,7 @@ export default function Footer() {
             ))}
           </Column>
 
-          <Column title="Threats">
+          <Column title="Topics">
             {THREATS.map((threat) => (
               <Link
                 key={threat}
