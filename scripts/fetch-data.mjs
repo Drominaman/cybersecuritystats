@@ -69,10 +69,58 @@ function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
 }
 
+/**
+ * The feed carries the same publisher under several spellings — "CrowdStrike",
+ * "CROWDSTRIKE", "Crowdstrike", "IBM " with a trailing space. They all slugify
+ * to one URL, so leaving them split strands stats on the wrong publisher page
+ * and 404s report pages whose publisher variant lost the lookup. Collapse each
+ * slug to a single spelling before anything downstream groups by publisher.
+ */
+function normalizePublishers(stats) {
+  const variants = new Map()
+  for (const stat of stats) {
+    if (!stat.publisher) continue
+    const name = stat.publisher.trim()
+    if (!name) continue
+    const slug = slugify(name)
+    if (!slug) continue
+    if (!variants.has(slug)) variants.set(slug, new Map())
+    const counts = variants.get(slug)
+    counts.set(name, (counts.get(name) || 0) + 1)
+  }
+
+  // Prefer a spelling that uses mixed case over SHOUTING or all lowercase;
+  // break ties on how often the spelling appears.
+  const casingRank = (name) =>
+    name !== name.toUpperCase() && name !== name.toLowerCase() ? 2 : name === name.toLowerCase() ? 1 : 0
+
+  const canonical = new Map()
+  let merged = 0
+  for (const [slug, counts] of variants) {
+    const best = [...counts.entries()].sort(
+      (a, b) => casingRank(b[0]) - casingRank(a[0]) || b[1] - a[1]
+    )[0][0]
+    canonical.set(slug, best)
+    if (counts.size > 1) merged++
+  }
+
+  for (const stat of stats) {
+    if (!stat.publisher) continue
+    const slug = slugify(stat.publisher.trim())
+    const best = canonical.get(slug)
+    if (best) stat.publisher = best
+  }
+
+  return merged
+}
+
 async function main() {
   console.log('Fetching all stats from Supabase...')
   const stats = await fetchAllStats()
   console.log(`Total: ${stats.length} stats`)
+
+  const merged = normalizePublishers(stats)
+  console.log(`Normalized publisher names (${merged} had multiple spellings)`)
 
   mkdirSync(OUT_DIR, { recursive: true })
 
