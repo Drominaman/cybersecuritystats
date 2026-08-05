@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import NewsletterPopup from '@/components/NewsletterPopup'
+import CookielessAnalytics from '@/components/CookielessAnalytics'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <NewsletterPopup />
+        <CookielessAnalytics />
       </body>
     </html>
   )
