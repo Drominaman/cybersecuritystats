@@ -123,7 +123,7 @@ export default async function ReportPage({ params }: Props) {
             href={sourceLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-4 border border-[var(--accent)] text-[var(--accent)] px-4 py-2 text-sm font-bold hover:bg-[var(--accent)] hover:text-[var(--accent-fg)] transition-colors"
+            className="inline-block mt-4 bg-[var(--accent)] text-[var(--accent-fg)] px-4 py-2 text-sm font-bold hover:opacity-90 transition-opacity"
           >
             View Original Report &rarr;
           </a>

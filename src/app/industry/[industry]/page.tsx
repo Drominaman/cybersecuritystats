@@ -6,6 +6,7 @@ import { getEnabledClusters } from '@/data/clusters'
 import { slugify, formatNumber } from '@/lib/utils'
 import { THREAT_NORMALIZE } from '@/data/tag-normalize'
 import StatCard from '@/components/StatCard'
+import { diversifyBySource } from '@/lib/diversify'
 
 export const revalidate = 86400
 
@@ -65,7 +66,7 @@ export default async function IndustryPage({ params }: Props) {
 
       <div className="mb-10">
         <h1 className="text-4xl font-black tracking-tighter leading-none mb-3">
-          <span className="text-[var(--accent)]">{cluster.label}</span> Cybersecurity Statistics
+          <span>{cluster.label}</span> Cybersecurity Statistics
         </h1>
         <div className="flex items-center gap-4 mt-4">
           <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
@@ -108,7 +109,7 @@ export default async function IndustryPage({ params }: Props) {
             </h2>
             <div className="flex-1 border-t border-[var(--border)]" />
           </div>
-          {stats.slice(0, 30).map((stat, i) => (
+          {diversifyBySource(stats, 30).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
         </div>

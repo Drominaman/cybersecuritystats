@@ -9,6 +9,7 @@ import StatCard from '@/components/StatCard'
 import { JsonLd, datasetSchema, breadcrumbSchema } from '@/components/JsonLd'
 
 import { THREAT_LABELS } from '@/data/threats'
+import { diversifyBySource } from '@/lib/diversify'
 
 export const revalidate = 86400
 
@@ -84,7 +85,7 @@ export default async function ThreatPage({ params }: Props) {
 
       <div className="mb-10">
         <h1 className="text-4xl font-black tracking-tighter leading-none mb-3">
-          <span className="text-[var(--accent)]">{label}</span> Statistics
+          <span>{label}</span> Statistics
         </h1>
         <div className="flex items-center gap-4 mt-4">
           <span className="bg-[var(--foreground)] text-[var(--background)] px-3 py-1 text-xs font-bold">
@@ -132,7 +133,7 @@ export default async function ThreatPage({ params }: Props) {
             </h2>
             <div className="flex-1 border-t border-[var(--border)]" />
           </div>
-          {stats.slice(0, 40).map((stat, i) => (
+          {diversifyBySource(stats, 40).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
         </div>

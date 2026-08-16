@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       </h1>
 
       <div className="space-y-6 text-[15px] leading-relaxed">
-        <p className="text-sm text-[var(--muted)]">Last updated: April 2026</p>
+        <p className="text-sm text-[var(--muted)]">Last updated: July 2026</p>
 
         <h2 className="text-lg font-black mt-8">What We Collect</h2>
         <p>

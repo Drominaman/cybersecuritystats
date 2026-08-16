@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getEnabledClusters } from '@/data/clusters'
-import { getTotalStatCount, getUniqueReportCount, getAllPublishers, getStatsForIndustry, getStatsForThreat, getMostRecentDate } from '@/lib/static-data'
+import StatCard from '@/components/StatCard'
+import { getTotalStatCount, getUniqueReportCount, getAllPublishers, getStatsForIndustry, getStatsForThreat, getMostRecentDate, getRecentStats } from '@/lib/static-data'
 import { formatDate } from '@/lib/utils'
 import { slugify } from '@/lib/utils'
 import { JsonLd, websiteSchema, datasetSchema } from '@/components/JsonLd'
@@ -8,12 +9,12 @@ import { JsonLd, websiteSchema, datasetSchema } from '@/components/JsonLd'
 export const revalidate = 3600
 
 const THREAT_CARDS = [
-  { name: 'Ransomware', slug: 'ransomware', desc: 'Attack frequency, ransom payments, recovery costs, and industry breakdowns.' },
-  { name: 'Phishing', slug: 'phishing', desc: 'Email threats, click rates, BEC incidents, and AI-assisted phishing trends.' },
-  { name: 'Data Breach', slug: 'data-breach', desc: 'Breach costs, detection times, records exposed, and compliance impact.' },
-  { name: 'Fraud', slug: 'fraud', desc: 'Financial fraud, identity theft, deepfake scams, and AI-powered fraud trends.' },
-  { name: 'DDoS', slug: 'ddos', desc: 'Attack volume, duration, mitigation costs, and targeted industries.' },
-  { name: 'Insider Threat', slug: 'insider-threat', desc: 'Employee risk, data exfiltration, negligent vs malicious insiders.' },
+  { name: 'Ransomware', slug: 'ransomware', desc: 'The most heavily reported topic here, and the one where publishers disagree most about how often organisations pay.' },
+  { name: 'Phishing', slug: 'phishing', desc: 'Click rates and BEC losses. Watch for figures that count attempts rather than successful attacks.' },
+  { name: 'Data Breach', slug: 'data-breach', desc: 'Breach costs and detection times.' },
+  { name: 'Fraud', slug: 'fraud', desc: 'Now dominated by deepfake and AI-assisted scams.' },
+  { name: 'DDoS', slug: 'ddos', desc: '' },
+  { name: 'Insider Threat', slug: 'insider-threat', desc: 'Negligent insiders outnumber malicious ones in almost every source.' },
 ]
 
 const COMPARE_CARDS = [
@@ -43,9 +44,9 @@ export default async function HomePage() {
     statCount: getStatsForThreat(t.name).length,
   }))
 
-  // Pick a featured stat — most recent notable one
-  const featuredStat = '93% of CISOs and AppSec executives are ready to replace or purchase new AI-native application protection.'
-  const featuredSource = 'Rein Security, 2026'
+  // The newest statistics, one per report. This used to be a hardcoded quote
+  // that never changed, which made the whole page look abandoned.
+  const [featured, ...recentStats] = getRecentStats(7)
 
   return (
     <div>
@@ -59,7 +60,7 @@ export default async function HomePage() {
       })} />
 
       {/* Hero — left-aligned, editorial feel */}
-      <div className="border-b border-[var(--border)]">
+      <div>
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 items-start">
             <div>
@@ -67,12 +68,11 @@ export default async function HomePage() {
                 Updated {formatDate(getMostRecentDate())}
               </p>
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.95] mb-6">
-                Cybersecurity Statistics,<br />
-                Indexed &amp; Organized
+                Cybersecurity Statistics
               </h1>
               <p className="text-lg text-[var(--muted)] mb-8 max-w-lg">
-                {totalStats.toLocaleString()} data points from {reportCount.toLocaleString()} industry reports.
-                Browse by sector, topic, or publisher.
+                Every figure is quoted as its publisher wrote it and linked back to the
+                report it came from, so you can check it before you cite it.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
@@ -92,20 +92,24 @@ export default async function HomePage() {
 
             {/* Featured stat — editorial hook */}
             <div className="border border-[var(--border)] p-6 bg-[var(--surface)]">
-              <p className="text-xs text-[var(--accent)] mb-3">
-                Featured Stat
+              <p className="text-xs text-[var(--muted)] mb-3">
+                Most recent
               </p>
               <p className="text-[15px] font-medium leading-relaxed mb-4">
-                &ldquo;{featuredStat}&rdquo;
+                {featured.link ? (
+                  <a href={featured.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    {featured.title}
+                  </a>
+                ) : featured.title}
               </p>
               <p className="text-xs text-[var(--muted)]">
-                {featuredSource}
+                {featured.publisher}, {featured.source_name}
               </p>
             </div>
           </div>
 
           {/* Quick stats bar */}
-          <div className="mt-12 pt-6 border-t border-[var(--border)] flex flex-wrap gap-6 md:gap-8">
+          <div className="mt-12 pt-6 flex flex-wrap gap-6 md:gap-8">
             <div>
               <span className="text-2xl font-black">{totalStats.toLocaleString()}</span>
               <span className="text-xs text-[var(--muted)] ml-2">statistics</span>
@@ -123,6 +127,22 @@ export default async function HomePage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4">
+        {/* Latest statistics. The page was navigation all the way down: five
+            browse grids and not one figure from the database it indexes. */}
+        <div className="py-12">
+          <div className="flex items-center gap-4 mb-2">
+            <h2 className="text-lg font-bold">Latest statistics</h2>
+          </div>
+          <p className="text-xs text-[var(--muted)] mb-6">
+            The newest addition from each of the last six reports.
+          </p>
+          <div>
+            {recentStats.map((stat, i) => (
+              <StatCard key={i} stat={stat} />
+            ))}
+          </div>
+        </div>
+
         {/* Industries section — with real counts */}
         <div className="py-12">
           <div className="flex items-center gap-4 mb-6">
@@ -190,9 +210,11 @@ export default async function HomePage() {
                     {threat.statCount}
                   </span>
                 </div>
-                <p className="text-xs text-[var(--muted)] leading-relaxed">
-                  {threat.desc}
-                </p>
+                {threat.desc && (
+                  <p className="text-xs text-[var(--muted)] leading-relaxed">
+                    {threat.desc}
+                  </p>
+                )}
               </Link>
             ))}
           </div>
@@ -255,14 +277,14 @@ export default async function HomePage() {
         <div className="py-12">
           <div className="max-w-xl">
             <p className="text-sm leading-relaxed">
-              Built for security researchers, analysts, and CISOs who need data, not marketing.
-              Every statistic links to its original source report.{' '}
+              Every statistic links to the report it came from, with the publisher and
+              publication date attached.{' '}
               <Link href="/about" className="underline">
                 Read about our methodology &rarr;
               </Link>
             </p>
             <p className="text-xs text-[var(--muted)] mt-3">
-              Curated by <Link href="/author" className="hover:underline">Laura Martisiute</Link>. Last updated April 2026.
+              Curated by <Link href="/author" className="hover:underline">Laura Martisiute</Link>. Last updated {formatDate(getMostRecentDate())}.
             </p>
           </div>
         </div>

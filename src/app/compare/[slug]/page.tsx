@@ -5,6 +5,7 @@ import { getStatsForThreat } from '@/lib/static-data'
 import { slugify, formatNumber } from '@/lib/utils'
 import { JsonLd, breadcrumbSchema } from '@/components/JsonLd'
 import StatCard from '@/components/StatCard'
+import { diversifyBySource } from '@/lib/diversify'
 
 export const revalidate = 86400
 
@@ -75,7 +76,7 @@ export default async function ComparePage({ params }: Props) {
       <div className="mb-10">
         <h1 className="text-4xl font-black tracking-tighter leading-none mb-6">
           {comp.a} <span className="text-[var(--muted)]">vs</span>{' '}
-          <span className="text-[var(--accent)]">{comp.b}</span>
+          <span>{comp.b}</span>
         </h1>
       </div>
 
@@ -110,7 +111,7 @@ export default async function ComparePage({ params }: Props) {
             </h2>
             <div className="flex-1 border-t border-[var(--border)]" />
           </div>
-          {statsA.slice(0, 15).map((stat, i) => (
+          {diversifyBySource(statsA, 15).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
           <Link
@@ -127,7 +128,7 @@ export default async function ComparePage({ params }: Props) {
             </h2>
             <div className="flex-1 border-t border-[var(--border)]" />
           </div>
-          {statsB.slice(0, 15).map((stat, i) => (
+          {diversifyBySource(statsB, 15).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
           <Link

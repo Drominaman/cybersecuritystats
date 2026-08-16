@@ -102,7 +102,7 @@ export default async function MatrixPage({ params }: Props) {
       <div className="mb-10">
         <h1 className="text-4xl font-black tracking-tighter leading-none mb-3">
           {match.cluster.label}{' '}
-          <span className="text-[var(--accent)]">{match.threat}</span>{' '}
+          <span>{match.threat}</span>{' '}
           Statistics
         </h1>
         <div className="flex items-center gap-4 mt-4">

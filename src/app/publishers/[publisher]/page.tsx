@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getStatsForPublisher, getAllPublishers } from '@/lib/static-data'
 import { slugify, formatNumber, titleCase } from '@/lib/utils'
 import StatCard from '@/components/StatCard'
+import { diversifyBySource } from '@/lib/diversify'
 
 export const revalidate = 86400
 
@@ -118,7 +119,7 @@ export default async function PublisherPage({ params }: Props) {
             </h2>
             <div className="flex-1 border-t border-[var(--border)]" />
           </div>
-          {stats.slice(0, 50).map((stat, i) => (
+          {diversifyBySource(stats, 50).map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
         </div>

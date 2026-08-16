@@ -4,6 +4,7 @@
  */
 import type { Stat, BlogPost } from '@/types'
 import { INDUSTRY_NORMALIZE, THREAT_NORMALIZE } from '@/data/tag-normalize'
+import { diversifyBySource } from '@/lib/diversify'
 
 import rawStats from '@/data/generated/stats.json'
 import rawPublishers from '@/data/generated/publishers.json'
@@ -114,4 +115,17 @@ export function getRelatedBlogPosts(slug: string, limit = 2): BlogPost[] {
     .sort((a, b) => b.shared - a.shared)
     .slice(0, limit)
     .map(({ post }) => post)
+}
+
+// The newest statistics, one per report. The snapshot is ordered by publication
+// date, so a single bulk import would otherwise fill the whole list.
+//
+// Rows without a publisher and report name are skipped: a figure nobody can
+// trace is not one to lead with, and the newest row in the snapshot happened to
+// be exactly that, which put an unattributed quote at the top of the homepage.
+export function getRecentStats(limit: number): Stat[] {
+  const attributed = stats.filter(
+    (stat) => stat.publisher?.trim() && stat.source_name?.trim(),
+  )
+  return diversifyBySource(attributed.slice(0, 500), limit, 1)
 }
