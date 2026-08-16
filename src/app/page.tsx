@@ -64,9 +64,6 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-12 items-start">
             <div>
-              <p className="text-xs text-[var(--muted)] mb-4">
-                Updated {formatDate(getMostRecentDate())}
-              </p>
               <h1 className="text-3xl md:text-5xl font-black tracking-tighter leading-[0.95] mb-6">
                 Cybersecurity Statistics
               </h1>
