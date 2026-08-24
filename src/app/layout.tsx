@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import NewsletterPopup from '@/components/NewsletterPopup'
+import PageViewBeacon from '@/components/PageViewBeacon'
 import { getPitchData } from '@/lib/popup-pitch'
 import CookielessAnalytics from '@/components/CookielessAnalytics'
 import './globals.css'
@@ -49,6 +50,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <NewsletterPopup pitch={getPitchData()} />
+        <PageViewBeacon />
         <CookielessAnalytics />
       </body>
     </html>
