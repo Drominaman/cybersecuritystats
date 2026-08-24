@@ -24,22 +24,40 @@ export default function PrivacyPage() {
 
         <h2 className="text-lg font-black mt-8">What We Collect</h2>
         <p>
-          CyberSecurityStats.com collects minimal data. We use basic analytics to
-          understand how the site is used (page views, referral sources). We do not
-          collect personal information unless you voluntarily provide it (e.g., newsletter
-          signup).
+          CyberSecurityStats.com collects minimal data. We measure page views and
+          referral sources to understand how the site is used. We do not collect
+          personal information unless you provide it, for example by subscribing to
+          the newsletter.
+        </p>
+
+        <h2 className="text-lg font-black mt-8">Analytics</h2>
+        <p>
+          We use two analytics tools, and they behave differently.
+        </p>
+        <p className="mt-3">
+          <strong>Plausible Analytics</strong> counts page views and referral sources.
+          It sets no cookies, stores nothing on your device, and does not track you
+          across websites or build a profile of you.
+        </p>
+        <p className="mt-3">
+          <strong>Microsoft Clarity</strong> records how pages are used, including
+          clicks, scrolling and mouse movement, so we can find broken layouts. It
+          stores identifiers on your device and Microsoft may use the data in
+          accordance with its own privacy policy.
         </p>
 
         <h2 className="text-lg font-black mt-8">Cookies</h2>
         <p>
-          We use essential cookies required for site functionality. We may use analytics
-          cookies to understand traffic patterns. No advertising cookies are used.
+          We use essential cookies required for site functionality, and Microsoft
+          Clarity stores identifiers on your device as described above. No advertising
+          cookies are used and we do not sell advertising.
         </p>
 
         <h2 className="text-lg font-black mt-8">Third-Party Services</h2>
         <p>
-          We use Netlify for hosting and Supabase for our database. These services
-          may process requests in accordance with their own privacy policies.
+          We use Netlify for hosting, Supabase for our database, Ghost for the
+          newsletter, and the analytics tools named above. These services may process
+          requests in accordance with their own privacy policies.
         </p>
 
         <h2 className="text-lg font-black mt-8">Your Data</h2>
