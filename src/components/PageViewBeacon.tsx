@@ -10,12 +10,18 @@ import { usePathname } from 'next/navigation'
  * visitor rather than only those who accept a consent banner. Fires on route
  * changes too, since the site navigates client-side and those would otherwise
  * never be counted.
+ *
+ * Canonical copy lives in ~/Development/traffic-dashboard/beacon/client.
+ * Edit it there and reinstall rather than editing a site's copy in place.
  */
 export default function PageViewBeacon() {
   const pathname = usePathname()
 
   useEffect(() => {
     if (!pathname) return
+
+    // The query string can carry search terms and identifiers. The path is all
+    // the "which pages get read" question needs.
     const params = new URLSearchParams({ p: pathname })
     if (document.referrer) params.set('r', document.referrer)
 

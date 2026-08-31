@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getEnabledClusters } from '@/data/clusters'
-import { getAllPublishers, getAllBlogPosts, getStatsForPublisher } from '@/lib/static-data'
+import { getAllPublishers, getAllBlogPosts, getStatsForPublisher, getStatsForReport } from '@/lib/static-data'
 import { slugify } from '@/lib/utils'
 
 const BASE = 'https://cybersecuritystats.com'
@@ -74,14 +74,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   })
 
-  // Top publishers (5+ stats)
-  for (const pub of publishers.filter((p) => p.count >= 5).slice(0, 200)) {
-    urls.push({
-      url: `${BASE}/publishers/${slugify(pub.publisher)}`,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    })
-  }
+  // Individual publisher pages are deliberately absent. They carry noindex, and
+  // a sitemap that lists pages we ask Google not to index sends two conflicting
+  // instructions. The publishers index above still links to them, so readers and
+  // crawlers can reach them.
 
   // Report pages. These are the bulk of the site and 436 of them have no
   // publisher page linking to them, since publisher pages stop at the top 200
@@ -96,6 +92,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const stat of getStatsForPublisher(pub.publisher)) {
       if (!stat.source_name || seen.has(stat.source_name)) continue
       seen.add(stat.source_name)
+      // Match the noindex rule on the report page itself: stubs are neither
+      // indexed nor advertised.
+      const statsInReport = getStatsForReport(pub.publisher, stat.source_name).length
+      if (statsInReport < 5) continue
       urls.push({
         url: `${BASE}/reports/${slugify(pub.publisher)}/${slugify(stat.source_name)}`,
         changeFrequency: 'monthly',

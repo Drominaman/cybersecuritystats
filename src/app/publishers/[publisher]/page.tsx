@@ -25,7 +25,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const name = titleCase(pub.publisher)
   const title = `${name} Cybersecurity Statistics`
   const description = `${pub.count} cybersecurity statistics from ${name}. Browse all reports and data.`
-  return { title, description, openGraph: { title, description } }
+  // Kept for readers and internal linking, kept out of the index. In the 28 days
+  // to 29 August these 201 pages produced 5.5% of the site's impressions and no
+  // clicks, while restating statistics that already appear on the topic,
+  // industry and report pages. That duplication across four templates is the
+  // shape of thin content, and the August 2026 spam update is the second time
+  // it has cost us.
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+    robots: { index: false, follow: true },
+  }
 }
 
 export async function generateStaticParams() {

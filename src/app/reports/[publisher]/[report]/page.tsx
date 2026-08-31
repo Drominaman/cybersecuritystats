@@ -56,6 +56,9 @@ function findPublisherAndReport(pubSlug: string, reportSlug: string) {
   return null
 }
 
+// Below this many statistics a report page is a stub, not a page.
+const MIN_INDEXABLE_STATS = 5
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { publisher, report } = await params
   const match = await findPublisherAndReport(publisher, report)
@@ -63,7 +66,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `${match.reportName} — ${match.publisher.publisher}`
   const description = `Key findings from ${match.reportName} by ${match.publisher.publisher}. ${match.stats.length} statistics and data points.`
-  return { title, description, openGraph: { title, description } }
+  // A report page earns its place in the index by having enough of the report on
+  // it to be worth landing on. Below five statistics it is a stub restating
+  // figures that already appear on the topic and industry pages, and 111 of
+  // these exist. They stay readable and linked, they just stop being entries in
+  // the index.
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+    robots: match.stats.length < MIN_INDEXABLE_STATS ? { index: false, follow: true } : undefined,
+  }
 }
 
 export default async function ReportPage({ params }: Props) {
