@@ -4,7 +4,6 @@ const LINKS: [string, string][] = [
   ['/industry/healthcare', 'Industries'],
   ['/threats/ransomware', 'Topics'],
   ['/compare/ransomware-vs-phishing', 'Compare'],
-  ['/benchmarks', 'Benchmarks'],
   ['/publishers', 'Publishers'],
   ['/blog', 'Blog'],
   ['/about', 'About'],
