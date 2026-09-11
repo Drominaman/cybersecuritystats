@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getEnabledClusters } from '@/data/clusters'
 import { getAllPublishers, getAllBlogPosts, getStatsForPublisher, getStatsForReport } from '@/lib/static-data'
 import { slugify } from '@/lib/utils'
+import { publishedBenchmarks } from '@/lib/benchmarks'
 
 const BASE = 'https://cybersecuritystats.com'
 
@@ -65,6 +66,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.7,
     })
+  }
+
+  // Benchmarks: the hub and one page per question with two or more sources.
+  urls.push({ url: `${BASE}/benchmarks`, changeFrequency: 'weekly', priority: 0.9 })
+  for (const b of await publishedBenchmarks()) {
+    urls.push({ url: `${BASE}/benchmarks/${b.id}`, changeFrequency: 'weekly', priority: 0.85 })
   }
 
   // Publishers index

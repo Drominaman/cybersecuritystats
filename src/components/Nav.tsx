@@ -36,6 +36,7 @@ export default function Nav() {
         <div className="flex lg:hidden items-center gap-4 text-sm">
           <Link href="/industry/healthcare" className="hover:underline">Industries</Link>
           <Link href="/threats/ransomware" className="hover:underline">Topics</Link>
+          <Link href="/benchmarks" className="hover:underline">Benchmarks</Link>
           <Link href="/publishers" className="hover:underline">Publishers</Link>
           <Link href="/blog" className="hover:underline">Blog</Link>
         </div>
